@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useAuth } from '@/contexts';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
+import { toast } from 'react-toastify';
 
 export const LoginForm: React.FC = () => {
   const {
@@ -18,7 +19,9 @@ export const LoginForm: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       await login(data);
+      toast.success('Login success');
     } catch (error) {
+      toast.error('Login failed');
       console.log(error);
     }
     console.log('Success:', data);

@@ -8,3 +8,4 @@ export const LOGGOUT = '/auth/local/logout';
 export const FORGOT_PASSWORD = '/auth/local/forgot-password';
 export const RECEIVE_OTP = '/auth/local/receive-otp';
 export const SET_PASSWORD = '/auth/local/otp-newpassword';
+export const REFRESH_TOKEN = '/auth/local/refresh-token';
