@@ -1,121 +1,129 @@
 'use client';
-
 import Link from 'next/link';
-import React from 'react';
-
-import { Form, Input } from 'antd';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 import { useAuth } from '@/contexts';
+import Image from 'next/image';
 
 export const SignupForm: React.FC = () => {
-  const [form] = Form.useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const { signup } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const onFinish = async (values: any) => {
+  const onSubmit = async (data: any) => {
     try {
-      await signup(values);
+      await signup(data);
     } catch (error) {
       console.log(error);
     }
-    console.log('Success:', values);
+    console.log('Success:', data);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
   return (
-    <div className='space-y-6 px-4 py-8 shadow sm:rounded-lg sm:px-10 '>
-      <Form
-        form={form}
-        layout='vertical'
-        name='signup_form'
-        initialValues={{ modifier: 'public' }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          name='name'
-          label={<span className='text-gray-800'>Name</span>}
-          rules={[{ required: true, message: 'Please input your name' }]}
-        >
-          <Input
+    <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+      <div className='mb-3 space-y-2'>
+        <Image src='/logo.png' alt='logo image' height={35} width={130} />
+        <h2 className='text-2xl font-semibold'>Sign up for an Account</h2>
+        <p className='text-sm'>
+          Create your account by filling out the information below
+        </p>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-9'>
+        <div className='max-w-md'>
+          <label htmlFor='name' className='text-gray-800'>
+            Name
+          </label>
+          <input
+            id='name'
             type='text'
             autoComplete='name'
-            className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-gray-400 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40'
+            {...register('name', { required: true })}
+            className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
           />
-        </Form.Item>
+          {errors.name && <p className='text-red-500'>Name is required</p>}
 
-        <Form.Item
-          name='email'
-          label={<span className='text-gray-800 '>Email</span>}
-          rules={[{ required: true, message: 'Please input your email' }]}
-        >
-          <Input
+          <label htmlFor='email' className='mt-4 text-gray-800'>
+            Email
+          </label>
+          <input
+            id='email'
             type='email'
             autoComplete='email'
-            className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-gray-400 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40 '
+            {...register('email', { required: true })}
+            className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
           />
-        </Form.Item>
+          {errors.email && <p className='text-red-500'>Email is required</p>}
 
-        <Form.Item
-          name='password'
-          label={<span className='text-gray-800 '>Password</span>}
-          rules={[
-            { required: true, message: 'Please input a password!' },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error('The two passwords do not match!')
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password type='password' autoComplete='new-password' />
-        </Form.Item>
+          <div className='relative'>
+            <label htmlFor='password' className='mt-4 text-gray-800'>
+              Password
+            </label>
+            <div className='flex items-center'>
+              <input
+                id='password'
+                type={showPassword ? 'text' : 'password'}
+                autoComplete='new-password'
+                {...register('password', { required: true })}
+                className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
+              />
+              <button
+                type='button'
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute inset-y-0 right-0 top-8 flex items-center px-2 focus:outline-none'
+              >
+                {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+              </button>
+            </div>
+            {errors.password && (
+              <p className='text-red-500'>Password is required</p>
+            )}
+          </div>
 
-        <Form.Item
-          name='confirmPassword'
-          label={<span className='text-gray-800 '>Confirm Password</span>}
-          dependencies={['password']}
-          rules={[
-            { required: true, message: 'Please confirm your password!' },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error('The two passwords do not match!')
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password type='password' autoComplete='new-password' />
-        </Form.Item>
+          <div className='relative'>
+            <label htmlFor='confirmPassword' className='mt-4 text-gray-800'>
+              Confirm Password
+            </label>
+            <input
+              id='confirmPassword'
+              type='password'
+              autoComplete='new-password'
+              {...register('confirmPassword', { required: true })}
+              className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
+            />
+            <button
+              type='button'
+              onClick={() => setShowPassword(!showPassword)}
+              className='absolute inset-y-0 right-0 top-8 flex items-center px-2 focus:outline-none'
+            >
+              {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className='text-red-500'>Confirm Password is required</p>
+          )}
 
-        <Form.Item>
-          <Input
+          <input
             type='submit'
-            className='mt-4 w-full transform rounded-md bg-gray-400 px-4 py-2 tracking-wide text-gray-800 transition-colors duration-200 hover:bg-gray-500 focus:bg-gray-600 focus:outline-none '
-            value={'Sign Up'}
+            className='mt-4 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-2 text-white  transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
+            value='Sign Up'
           />
-        </Form.Item>
-      </Form>
+        </div>
+      </form>
       <div className='relative mt-6 flex w-full items-center justify-center border border-t'>
-        <div className='absolute bg-gray-100 px-5 text-black '>Or</div>
+        <div className='absolute bg-gray-100 px-5 text-black'>Or</div>
       </div>
-
-      <p className='mt-4 text-center text-sm text-gray-700 '>
-        {'Already have an account? '}
+      <p className='mt-4 text-center text-sm text-gray-700'>
+        Already have an account?{' '}
         <Link
-          href='/login'
+          href='/signin'
           className='font-medium text-blue-600 hover:underline'
         >
-          Login
+          SignIn
         </Link>
       </p>
     </div>
