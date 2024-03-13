@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 import { useAuth } from '@/contexts';
 import Image from 'next/image';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 
@@ -42,7 +42,6 @@ export const SignupForm: React.FC = () => {
 
   return (
     <>
-      <ToastContainer /> {/* Toast container component */}
       <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
         <div className='mb-3 space-y-2'>
           <Image src='/logo.png' alt='logo image' height={35} width={130} />

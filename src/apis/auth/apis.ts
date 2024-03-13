@@ -7,10 +7,12 @@ import {
   LOGGOUT,
   SIGNIN,
   RECEIVE_OTP,
+  REFRESH_TOKEN,
   REGISTER,
   SET_PASSWORD,
   VERIFY_EMAIL,
 } from './endpoints';
+import { ACCESS_TOKEN_STORAGE, REFRESH_TOKEN_STORAGE } from '@/constants';
 
 export const signinApi = async (email: any, password: any) => {
   try {
@@ -23,33 +25,43 @@ export const signinApi = async (email: any, password: any) => {
 };
 
 export const signupApi = async (values: any) => {
+  const response = await axios.post(REGISTER, values);
+  return response.data;
+};
+
+export const refreshToken = async () => {
+  const refreshToken = localStorage.getItem(REFRESH_TOKEN_STORAGE);
+  if (!refreshToken) {
+    return null;
+  }
   try {
-    const response = await axios.post(REGISTER, values);
-    return response.data;
+    const response = await axios.post(REFRESH_TOKEN, {
+      token: refreshToken,
+    });
+    if (response.data?.status === 'success') {
+      localStorage.setItem(ACCESS_TOKEN_STORAGE, response.data?.access_token);
+      localStorage.setItem(REFRESH_TOKEN_STORAGE, response.data?.refresh_token);
+      return response.data?.access_token;
+    } else {
+      localStorage.removeItem(ACCESS_TOKEN_STORAGE);
+      localStorage.removeItem(REFRESH_TOKEN_STORAGE);
+      return null;
+    }
   } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
+    localStorage.removeItem(ACCESS_TOKEN_STORAGE);
+    localStorage.removeItem(REFRESH_TOKEN_STORAGE);
+    return null;
   }
 };
 
 export const checkEmailValidity = async (email: any) => {
-  try {
-    const response = await axios.post(CHECK_EMAIL, { email });
-    return response.data;
-  } catch (error) {
-    console.error('Error checking email validity:', error);
-    throw error;
-  }
+  const response = await axios.post(CHECK_EMAIL, { email });
+  return response.data;
 };
 
 export const verifyEmail = async (email: string, otp: string) => {
-  try {
-    const response = await axios.post(VERIFY_EMAIL, { email, otp });
-    return response.data;
-  } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
-  }
+  const response = await axios.post(VERIFY_EMAIL, { email, otp });
+  return response.data;
 };
 
 export const isLoggedIn = async () => {
@@ -74,7 +86,7 @@ export const getRoles = async () => {
   }
 };
 
-export const logout = async () => {
+export const logoutApi = async () => {
   try {
     await axios.get(LOGGOUT);
     return true;
@@ -84,23 +96,13 @@ export const logout = async () => {
 };
 
 export const forgetPassword = async (email: string) => {
-  try {
-    const response = await axios.post(FORGOT_PASSWORD, { email });
-    return response.data;
-  } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
-  }
+  const response = await axios.post(FORGOT_PASSWORD, { email });
+  return response.data;
 };
 
 export const forgotPasswordOtp = async (email: string, otp: string) => {
-  try {
-    const response = await axios.post(RECEIVE_OTP, { email, otp });
-    return response.data;
-  } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
-  }
+  const response = await axios.post(RECEIVE_OTP, { email, otp });
+  return response.data;
 };
 
 export const forgotPasswordOtpNewPassword = async (
@@ -108,15 +110,10 @@ export const forgotPasswordOtpNewPassword = async (
   otp: string,
   password: string
 ) => {
-  try {
-    const response = await axios.post(SET_PASSWORD, {
-      email,
-      otp,
-      password,
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
-  }
+  const response = await axios.post(SET_PASSWORD, {
+    email,
+    otp,
+    password,
+  });
+  return response.data;
 };

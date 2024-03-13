@@ -1,13 +1,24 @@
-import Axios from 'axios';
+import { refreshToken } from '@/apis';
+import { ACCESS_TOKEN_STORAGE } from '@/constants';
+import Axios, { AxiosRequestConfig } from 'axios';
 
 export const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URI,
   withCredentials: true,
 });
 
+interface RetryQueueItem {
+  resolve: (value?: any) => void;
+  reject: (error?: any) => void;
+  config: AxiosRequestConfig;
+}
+
+const refreshAndRetryQueue: RetryQueueItem[] = [];
+let isRefreshing = false;
+
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem(ACCESS_TOKEN_STORAGE);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -19,22 +30,37 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  (response) => {
-    if (response.status === 302) {
-      // Handle the redirection here
-      const redirectUrl = response.headers['location'];
-      // router.push(redirectUrl); // Use the navigate function to redirect
-      window.location.href = redirectUrl;
-    }
-    return response;
+  (config) => {
+    return config;
   },
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('accessToken');
-      // router.push('/login');
-      // window.location.href = "/login";
+  async (error) => {
+    const originalRequest: AxiosRequestConfig = error.config;
+    if (error.response && error.response.status === 498) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const newAccessToken = await refreshToken();
+          error.config.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          refreshAndRetryQueue.forEach(({ config, resolve, reject }) => {
+            axios
+              .request(config)
+              .then((response) => resolve(response))
+              .catch((err) => reject(err));
+          });
+          refreshAndRetryQueue.length = 0;
+          return axios(originalRequest);
+        } catch (refreshError) {
+          console.error(refreshError);
+          throw refreshError;
+        } finally {
+          isRefreshing = false;
+        }
+      }
+      return new Promise((resolve, reject) => {
+        refreshAndRetryQueue.push({ resolve, reject, config: originalRequest });
+      });
     }
-    throw error;
+    return Promise.reject(error);
   }
 );
 

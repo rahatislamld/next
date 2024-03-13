@@ -4,6 +4,7 @@ import { Providers } from '@/providers';
 import { Lato } from 'next/font/google';
 import { usePathname } from 'next/navigation';
 import './globals.css';
+import { ToastContainer } from 'react-toastify';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function RootLayout({
           {!isAuthPage && <NavBar />}
           <main className='bg-[#ecede8]'>{children}</main>
         </Providers>
+        <ToastContainer />
       </body>
     </html>
   );
