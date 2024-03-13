@@ -3,8 +3,8 @@ import { ACCESS_TOKEN_STORAGE, REFRESH_TOKEN_STORAGE } from '@/constants';
 import { ReactNode, createContext, useContext, useState } from 'react';
 
 interface AuthContextType {
-  signup: (values: any) => Promise<void>;
-  login: (values: any) => Promise<void>;
+  signup: (values: any) => Promise<boolean>; // Return type changed to boolean
+  login: (values: any) => Promise<boolean>; // Return type changed to boolean
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,7 +24,8 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const signup = async (values: any) => {
+  const signup = async (values: any): Promise<boolean> => {
+    // Function return type changed to Promise<boolean>
     try {
       const ret = await signupApi(values);
       if (ret?.status === 'success') {
@@ -32,18 +33,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.setItem(ACCESS_TOKEN_STORAGE, ret.accessToken);
         if (ret.refreshToken)
           localStorage.setItem(REFRESH_TOKEN_STORAGE, ret.refreshToken);
+        return true; // Return true for successful signup
       } else {
         setIsLoggedIn(false);
+        return false; // Return false for failed signup
       }
     } catch (error) {
       setIsLoggedIn(false);
       localStorage.removeItem(ACCESS_TOKEN_STORAGE);
       localStorage.removeItem(REFRESH_TOKEN_STORAGE);
-      console.error('Error login:', error);
+      console.error('Error signing up:', error);
+      return false; // Return false for failed signup
     }
   };
 
-  const login = async (values: any) => {
+  const login = async (values: any): Promise<boolean> => {
+    // Function return type changed to Promise<boolean>
     if (isLoggedIn) {
       setIsLoggedIn(false);
     }
@@ -54,16 +59,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.setItem(ACCESS_TOKEN_STORAGE, ret.accessToken);
         if (ret.refreshToken)
           localStorage.setItem(REFRESH_TOKEN_STORAGE, ret.refreshToken);
+        return true; // Return true for successful login
       } else {
         setIsLoggedIn(false);
+        return false; // Return false for failed login
       }
     } catch (error) {
       setIsLoggedIn(false);
       localStorage.removeItem(ACCESS_TOKEN_STORAGE);
       localStorage.removeItem(REFRESH_TOKEN_STORAGE);
-      console.error('Error signing up:', error);
+      console.error('Error logging in:', error);
+      return false; // Return false for failed login
     }
   };
+
   return (
     <AuthContext.Provider value={{ signup, login }}>
       {children}

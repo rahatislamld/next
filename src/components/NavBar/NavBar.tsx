@@ -4,10 +4,10 @@ import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
+import ProfileBar from './ProfileBar';
 
 const NavBar: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState(() => {
-    // Check if localStorage is available before accessing it
     if (typeof window !== 'undefined') {
       return localStorage.getItem('activeMenu') || 'signin';
     }
@@ -66,6 +66,9 @@ const NavBar: React.FC = () => {
                     <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
                   )}
                 </Disclosure.Button>
+              </div>
+              <div className='flex items-center'>
+                <ProfileBar />
               </div>
             </div>
           </div>
