@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useAuth } from '@/contexts';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 
-export const LoginForm: React.FC = () => {
+export const SignInForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ export const LoginForm: React.FC = () => {
         <div className='max-w-md'>
           <div className='mb-3 space-y-2'>
             <Image src='/logo.png' alt='logo image' height={35} width={130} />
-            <h2 className='text-2xl font-semibold'>Log in to your Account</h2>
+            <h2 className='text-2xl font-semibold'>Sign in to your Account</h2>
             <p className='text-sm'>
               Use your work email or phone number to log in to your account
             </p>
@@ -93,7 +93,7 @@ export const LoginForm: React.FC = () => {
 
         <input
           type='submit'
-          value='Log In'
+          value='Sign In'
           className='w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
         />
       </form>

@@ -5,16 +5,16 @@ import {
   GET_ROLE,
   IS_LOGGEDIN,
   LOGGOUT,
-  LOGIN,
+  SIGNIN,
   RECEIVE_OTP,
   REGISTER,
   SET_PASSWORD,
   VERIFY_EMAIL,
 } from './endpoints';
 
-export const loginApi = async (email: any, password: any) => {
+export const signInApi = async (email: any, password: any) => {
   try {
-    const response = await axios.post(LOGIN, { email, password });
+    const response = await axios.post(SIGNIN, { email, password });
     return response.data;
   } catch (error) {
     console.error('Error logging in:', error);

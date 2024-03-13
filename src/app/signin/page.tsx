@@ -1,12 +1,12 @@
 'use client';
-import { LoginContainer } from '@/containers';
+import { SignInContainer } from '@/containers';
 import React from 'react';
-const LoginPage: React.FC = () => {
+const SignInPage: React.FC = () => {
   return (
     <>
-      <LoginContainer />
+      <SignInContainer />
     </>
   );
 };
 
-export default LoginPage;
+export default SignInPage;

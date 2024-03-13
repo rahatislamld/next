@@ -14,6 +14,7 @@ export const SignupForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   const { signup } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -26,15 +27,18 @@ export const SignupForm: React.FC = () => {
         toast.success('Successfull.');
         router.push('/signin');
       } else {
-        toast.error('Sign up failed. Please try again.');
+        toast.error('Sign up failed1. Please try again.');
       }
     } catch (error: any) {
       console.log(error);
-      toast.error('Sign up failed. Please try again.');
+      toast.error('Sign up failed.2 Please try again.');
       // toast.error(error);
     }
     console.log('Success:', data);
   };
+
+  // Watch the value of confirmPassword field
+  const confirmPassword = watch('confirmPassword');
 
   return (
     <>
@@ -106,7 +110,11 @@ export const SignupForm: React.FC = () => {
                 id='confirmPassword'
                 type='password'
                 autoComplete='new-password'
-                {...register('confirmPassword', { required: true })}
+                {...register('confirmPassword', {
+                  required: true,
+                  validate: (value) =>
+                    value === confirmPassword || 'The passwords do not match',
+                })}
                 className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
               />
               <button
@@ -116,10 +124,10 @@ export const SignupForm: React.FC = () => {
               >
                 {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
               </button>
+              {errors.confirmPassword && (
+                <p className='text-red-500'>{errors.confirmPassword.message}</p>
+              )}
             </div>
-            {errors.confirmPassword && (
-              <p className='text-red-500'>Confirm Password is required</p>
-            )}
 
             <input
               type='submit'

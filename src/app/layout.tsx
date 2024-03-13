@@ -2,6 +2,7 @@
 import NavBar from '@/components/NavBar/NavBar';
 import { Providers } from '@/providers';
 import { Lato } from 'next/font/google';
+import { usePathname } from 'next/navigation';
 import './globals.css';
 
 const lato = Lato({
@@ -14,11 +15,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentPath = usePathname();
+  const isAuthPage = currentPath === '/signin' || currentPath === '/signup';
+
   return (
     <html lang='en'>
       <body className={lato.className}>
         <Providers>
-          <NavBar />
+          {!isAuthPage && <NavBar />}
           <main className='bg-[#ecede8]'>{children}</main>
         </Providers>
       </body>

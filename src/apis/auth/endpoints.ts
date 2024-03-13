@@ -1,5 +1,5 @@
 export const CHECK_EMAIL = '/auth/local/check-email';
-export const LOGIN = '/auth/local/login';
+export const SIGNIN = '/auth/local/login';
 export const REGISTER = '/auth/local/register';
 export const VERIFY_EMAIL = '/auth/local/verify-email';
 export const IS_LOGGEDIN = '/auth/local/isloggedin';

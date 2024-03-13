@@ -67,7 +67,7 @@ const NavBar: React.FC = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className='flex items-center'>
+              <div className='hidden items-center md:flex  '>
                 <ProfileBar />
               </div>
             </div>
