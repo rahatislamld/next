@@ -12,12 +12,12 @@ export const SignInForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { login } = useAuth();
+  const { signin } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data: any) => {
     try {
-      await login(data);
+      await signin(data);
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +105,7 @@ export const SignInForm: React.FC = () => {
       <p className='mt-4 text-center text-sm text-gray-700'>
         {'Create an account '}
         <Link
-          href='/signup'
+          href='/userauth/signup'
           className='font-medium text-blue-600 hover:underline'
         >
           Signup

@@ -12,7 +12,7 @@ import {
   VERIFY_EMAIL,
 } from './endpoints';
 
-export const signInApi = async (email: any, password: any) => {
+export const signinApi = async (email: any, password: any) => {
   try {
     const response = await axios.post(SIGNIN, { email, password });
     return response.data;
