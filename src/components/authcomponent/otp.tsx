@@ -86,7 +86,7 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
                 id={`otp${index + 1}`}
                 type='text'
                 maxLength={1}
-                {...register(`otp${index + 1}` as keyof FormData, {
+                {...register(`otp${index + 1}`, {
                   required: true,
                 })}
                 className='mt-2 flex w-1/4 items-center justify-center rounded-md border bg-white px-2 py-2 text-center text-3xl font-semibold text-[#036c3c]  focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'

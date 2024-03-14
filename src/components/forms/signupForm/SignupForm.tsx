@@ -124,7 +124,7 @@ export const SignupForm: React.FC = () => {
                 {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
               </button>
               {errors.confirmPassword && (
-                <p className='text-red-500'>{errors.confirmPassword.message}</p>
+                <p className='text-red-500'>Passwords do not match</p>
               )}
             </div>
 
