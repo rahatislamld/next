@@ -2,16 +2,18 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Pencil2Icon, CopyIcon } from '@radix-ui/react-icons';
 import { Fragment } from 'react';
+import NotificationBar from './NotificationBar';
 
 export default function Example() {
   return (
-    <div className=' w-56  text-right'>
+    <div className=' flex  w-56 space-x-2 text-right'>
+      <NotificationBar />
       <Menu as='div' className='relative inline-block text-left'>
         <div>
           <Menu.Button className='inline-flex w-full justify-center rounded-md border-2 border-[#036c3c] px-4 py-2 text-sm font-medium text-[#036c3c] hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75'>
             Karim
             <ChevronDownIcon
-              className='-mr-1 ml-2 h-5 w-5 text-[#036c3c] '
+              className='-mr-1 ml-2 h-5 w-5 text-[#036c3c] hover:text-violet-100'
               aria-hidden='true'
             />
           </Menu.Button>

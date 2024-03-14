@@ -54,7 +54,7 @@ export const SignInForm: React.FC = () => {
             <label htmlFor='password' className='text-gray-800'>
               Password
             </label>
-            <Link href='/forgot-password'>
+            <Link href='/userauth/forgotpassword'>
               <span className='text-blue-600 hover:underline'>
                 Forgot Password?
               </span>

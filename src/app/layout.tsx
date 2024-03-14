@@ -3,8 +3,8 @@ import NavBar from '@/components/NavBar/NavBar';
 import { Providers } from '@/providers';
 import { Lato } from 'next/font/google';
 import { usePathname } from 'next/navigation';
-import './globals.css';
 import { ToastContainer } from 'react-toastify';
+import './globals.css';
 
 const lato = Lato({
   subsets: ['latin'],
@@ -18,7 +18,11 @@ export default function RootLayout({
 }>) {
   const currentPath = usePathname();
   const isAuthPage =
-    currentPath === '/userauth/signin' || currentPath === '/userauth/signup';
+    currentPath === '/userauth/signin' ||
+    currentPath === '/userauth/signup' ||
+    currentPath === '/userauth/otp' ||
+    currentPath === '/userauth/forgotpassword' ||
+    currentPath === 'userauth/setpassword';
 
   return (
     <html lang='en'>
