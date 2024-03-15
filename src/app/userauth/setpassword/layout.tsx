@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const SetPasswordLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  return (
+    <>
+      <Suspense>{children}</Suspense>
+    </>
+  );
 };
 
 export default SetPasswordLayout;

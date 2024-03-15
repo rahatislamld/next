@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ForgotPasswordLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default ForgotPasswordLayout;

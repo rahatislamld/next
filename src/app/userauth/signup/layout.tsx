@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignupLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default SignupLayout;
