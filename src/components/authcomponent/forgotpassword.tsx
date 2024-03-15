@@ -1,41 +1,48 @@
 'use client';
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { KeyIcon } from '@heroicons/react/24/outline';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { forgetPassword } from '@/apis';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 export const ForgotPasswordForm: React.FC<object> = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitted, touchedFields },
+    formState: { errors, isSubmitting },
   } = useForm<{ email: string }>();
-  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
 
   const onSubmit = async (data: { email: string }) => {
     try {
-      console.log('Reset password for email:', data.email);
-    } catch (error) {
-      console.log('Error:', error);
+      const res = await forgetPassword(data.email);
+      toast.success(res.message);
+      router.push(`/userauth/otp?email=${data.email}`);
+    } catch (error: any) {
+      toast.error(error.response?.data?.message ?? 'Something went wrong');
+      console.log('Error:', error.response?.data?.message);
     }
   };
 
   return (
     <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-        <div className='max-w-md'>
-          <div className='mb-3 flex flex-col items-center space-y-4'>
-            <div className='rounded-full bg-green-50 p-3'>
-              <div className='rotate-180 rounded-full bg-green-100 p-3'>
-                <KeyIcon className='h-8 w-8 ' />
-              </div>
+        <div className='mb-3 flex flex-col items-center space-y-4'>
+          <div className='rounded-full bg-green-50 p-3'>
+            <div className='rotate-180 rounded-full bg-green-100 p-3'>
+              <KeyIcon className='h-8 w-8 ' />
             </div>
-            <h2 className='text-2xl font-semibold'>Forgot Password</h2>
-            <p className='text-[12px]'>
-              Please enter your email address to reset your password
-            </p>
           </div>
+          <h2 className='text-2xl font-semibold'>Forgot Password</h2>
+          <p className='text-[12px]'>
+            Please enter your email address to reset your password
+          </p>
+        </div>
+        <div>
           <label htmlFor='email' className='mt-4 text-gray-800'>
             Email
           </label>
@@ -43,18 +50,19 @@ export const ForgotPasswordForm: React.FC<object> = () => {
             <input
               id='email'
               type='email'
+              autoComplete='email'
               {...register('email', { required: true })}
               className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-              ref={emailInputRef}
             />
           </div>
 
-          {isSubmitted && touchedFields.email && (
+          {errors.email && (
             <p className='text-red-500'>Please enter your email</p>
           )}
         </div>
         <input
           type='submit'
+          disabled={isSubmitting}
           value='Reset Password'
           className='my-6 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
         />

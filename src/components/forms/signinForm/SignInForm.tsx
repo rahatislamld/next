@@ -19,6 +19,7 @@ export const SignInForm: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       await signin(data);
+      toast.success('Login successful');
     } catch (error) {
       toast.error('Login failed');
       console.log(error);
@@ -29,13 +30,11 @@ export const SignInForm: React.FC = () => {
   return (
     <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-        <div className='max-w-md'>
+        <div className=''>
           <div className='mb-3 space-y-2'>
             <Image src='/logo.png' alt='logo image' height={35} width={130} />
             <h2 className='text-2xl font-semibold'>Sign in to your Account</h2>
-            <p className='text-sm'>
-              Use your work email or phone number to log in to your account
-            </p>
+            <p className='text-sm'>Use your email to log in to your account</p>
           </div>
           <label htmlFor='email' className='text-gray-800'>
             Email

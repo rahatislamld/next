@@ -1,12 +1,19 @@
+'use client';
 import { OTPForm } from '@/components/authcomponent/otp';
+import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
 const SendOTP = () => {
+  const searchParams = useSearchParams();
+
+  const email = searchParams.get('email');
+
   return (
-    <div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden  '>
-      <div className='rounded-md p-6 md:max-w-xl lg:max-w-xl'>
-        <div className='mx-auto mt-8 sm:w-full sm:max-w-md'>
-          <OTPForm email={'BSSE1105@GMAIL.COM'} />;
+    <div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden'>
+      <div className='m-6 rounded-md'>
+        <div className='mx-auto'>
+          {!email && <div>Page not found</div>}
+          {email && <OTPForm email={email} />}
         </div>
       </div>
     </div>

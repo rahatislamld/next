@@ -1,10 +1,13 @@
 'use client';
+import { forgotPasswordOtp } from '@/apis';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import React, { useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-const OTP_SIZE = 4;
+const OTP_SIZE = 6;
 
 interface FormData {
   [key: string]: string;
@@ -14,15 +17,20 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitted, touchedFields },
+    formState: { errors },
   } = useForm<FormData>();
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  // const firstInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: any) => {
     try {
-      console.log('OTP submitted:', data);
-      console.log(email);
-    } catch (error) {
+      const otpString = Object.values(data).join('');
+      const ret = await forgotPasswordOtp(email, otpString);
+      toast.success(ret?.message ?? 'OTP submitted successfully');
+      localStorage.setItem('userotp', otpString);
+      router.push(`/userauth/setpassword?email=${email}`);
+    } catch (error: any) {
+      toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log('Error:', error);
     }
   };
@@ -64,6 +72,15 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
     });
   };
 
+  const isAllOTPFilled = () => {
+    for (let i = 1; i <= OTP_SIZE; i++) {
+      if (errors[`otp${i}`]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   return (
     <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
@@ -88,16 +105,18 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
                 maxLength={1}
                 {...register(`otp${index + 1}`, {
                   required: true,
+                  maxLength: 1,
+                  minLength: 1,
                 })}
                 className='mt-2 flex w-1/4 items-center justify-center rounded-md border bg-white px-2 py-2 text-center text-3xl font-semibold text-[#036c3c]  focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
                 onChange={(e) => handleInputChange(e, index + 1)}
-                ref={index === 0 ? firstInputRef : undefined}
+                // ref={index === 0 ? firstInputRef : undefined}
                 onPaste={handlePaste}
               />
             ))}
           </div>
 
-          {isSubmitted && Object.keys(touchedFields).length > 0 && (
+          {isAllOTPFilled() && (
             <p className='text-red-500'>
               Please enter all {OTP_SIZE} OTP digits
             </p>

@@ -1,10 +1,8 @@
 'use client';
 import { CheckBadgeIcon } from '@heroicons/react/24/outline';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-export const SuccessMessage: React.FC<object> = () => {
-  const router = useRouter();
+
+export const SuccessSetPasswordMessage: React.FC<object> = () => {
   return (
     <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <div className='space-y-5'>
@@ -21,22 +19,13 @@ export const SuccessMessage: React.FC<object> = () => {
             </p>
           </div>
         </div>
-        <button
-          onClick={() => router.push('/userauth/signin')}
-          className='my-6 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
-        >
-          Continue
-        </button>
-      </div>
-
-      <p className='mt-4 text-center text-sm text-gray-700'>
         <Link
           href='/userauth/signin'
-          className='flex items-center justify-center font-medium text-gray-500 hover:text-gray-700 hover:underline'
+          className=' flex  transform justify-center rounded-md bg-[#036c3c] px-4 py-3  text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
         >
-          <ArrowLeftIcon className='mr-1 mt-1 h-4 w-4' /> Back to sign in
+          Continue
         </Link>
-      </p>
+      </div>
     </div>
   );
 };

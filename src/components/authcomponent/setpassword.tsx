@@ -1,4 +1,5 @@
 'use client';
+import { forgotPasswordOtpNewPassword } from '@/apis';
 import { KeyIcon } from '@heroicons/react/24/outline';
 import {
   ArrowLeftIcon,
@@ -6,32 +7,57 @@ import {
   EyeOpenIcon,
 } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 interface FormData {
   password: string;
   confirmPassword: string;
 }
 
-export const SetPasswordForm: React.FC<object> = () => {
+// props interface
+interface Props {
+  email: string;
+}
+
+export const SetPasswordForm: React.FC<Props> = ({ email }) => {
   const {
     register,
     handleSubmit,
-    formState: { touchedFields, errors },
+    formState: { errors },
     watch,
   } = useForm<FormData>();
+
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const localotp = window.localStorage.getItem('userotp') ?? '394413';
+      setOtp(localotp);
+      localStorage.removeItem('userotp');
+    }
+  }, []);
 
   const onSubmit = async (data: FormData) => {
+    if (!otp) {
+      toast.error('OTP not found');
+      return;
+    }
     try {
-      console.log('Password set:', data);
+      const ret = await forgotPasswordOtpNewPassword(email, otp, data.password);
+      toast.success(ret?.message ?? 'Password updated successfuly');
+      router.push(`/userauth/success`);
     } catch (error) {
       console.log('Error:', error);
     }
   };
 
-  const confirmPassword = watch('confirmPassword');
+  const confirmPassword = watch('password');
 
   return (
     <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
@@ -68,9 +94,9 @@ export const SetPasswordForm: React.FC<object> = () => {
                 {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
               </button>
             </div>
-            {touchedFields.password && errors.password && (
+            {errors.password && (
               <p className='text-red-500'>
-                Password must be at least 8 characters
+                Password must be at least 6 characters
               </p>
             )}
           </div>
@@ -81,7 +107,7 @@ export const SetPasswordForm: React.FC<object> = () => {
             </label>
             <input
               id='confirmPassword'
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               autoComplete='new-password'
               {...register('confirmPassword', {
                 required: true,
@@ -97,7 +123,7 @@ export const SetPasswordForm: React.FC<object> = () => {
             >
               {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
             </button>
-            {touchedFields.confirmPassword && errors.confirmPassword && (
+            {errors.confirmPassword && (
               <p className='text-red-500'>Passwords do not match</p>
             )}
           </div>
