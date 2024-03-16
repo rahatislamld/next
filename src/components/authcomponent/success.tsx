@@ -20,7 +20,7 @@ export const SuccessSetPasswordMessage: React.FC<object> = () => {
           </div>
         </div>
         <Link
-          href='/userauth/signin'
+          href='/signin'
           className=' flex  transform justify-center rounded-md bg-[#036c3c] px-4 py-3  text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
         >
           Continue

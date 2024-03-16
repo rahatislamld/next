@@ -19,8 +19,8 @@ const NavBar: React.FC = () => {
   }, [activeMenu]);
 
   const navigation = [
-    { name: 'SignUp', href: '/userauth/signup' },
-    { name: 'SignIn', href: '/userauth/signin' },
+    { name: 'SignUp', href: '/signup' },
+    { name: 'SignIn', href: '/signin' },
   ];
 
   const handleMenuClick = (name: string) => {

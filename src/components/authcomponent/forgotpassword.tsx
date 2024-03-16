@@ -21,7 +21,7 @@ export const ForgotPasswordForm: React.FC<object> = () => {
     try {
       const res = await forgetPassword(data.email);
       toast.success(res.message);
-      router.push(`/userauth/otp?email=${data.email}`);
+      router.push(`/otp?email=${data.email}`);
     } catch (error: any) {
       toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log('Error:', error.response?.data?.message);
@@ -70,7 +70,7 @@ export const ForgotPasswordForm: React.FC<object> = () => {
 
       <p className='mt-4 text-center text-sm text-gray-700'>
         <Link
-          href='/userauth/signin'
+          href='/signin'
           className='flex items-center justify-center font-medium text-gray-500 hover:text-gray-700 hover:underline'
         >
           <ArrowLeftIcon className='mr-1 mt-1 h-4 w-4' /> Back to sign in
