@@ -25,7 +25,7 @@ export const SignupForm: React.FC = () => {
       const res = await signup(data);
       if (res) {
         toast.success('Successfull.');
-        router.push('/userauth/signin');
+        router.push('/signin');
       } else {
         toast.error('Sign up failed1. Please try again.');
       }
@@ -141,7 +141,7 @@ export const SignupForm: React.FC = () => {
         <p className='mt-4 text-center text-sm text-gray-700'>
           Already have an account?{' '}
           <Link
-            href='/userauth/signin'
+            href='/signin'
             className='font-medium text-blue-600 hover:underline'
           >
             SignIn

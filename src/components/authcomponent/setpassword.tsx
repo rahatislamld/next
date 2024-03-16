@@ -39,7 +39,6 @@ export const SetPasswordForm: React.FC<Props> = ({ email }) => {
     if (typeof window !== 'undefined') {
       const localotp = window.localStorage.getItem('userotp') ?? '394413';
       setOtp(localotp);
-      localStorage.removeItem('userotp');
     }
   }, []);
 
@@ -51,8 +50,11 @@ export const SetPasswordForm: React.FC<Props> = ({ email }) => {
     try {
       const ret = await forgotPasswordOtpNewPassword(email, otp, data.password);
       toast.success(ret?.message ?? 'Password updated successfuly');
-      router.push(`/userauth/success`);
-    } catch (error) {
+      router.push(`/success`);
+      localStorage.removeItem('userotp');
+    } catch (error: any) {
+      localStorage.removeItem('userotp');
+      toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log('Error:', error);
     }
   };
@@ -137,7 +139,7 @@ export const SetPasswordForm: React.FC<Props> = ({ email }) => {
 
       <p className='mt-4 text-center text-sm text-gray-700'>
         <Link
-          href='/userauth/signin'
+          href='/signin'
           className='flex items-center justify-center font-medium text-gray-500 hover:text-gray-700 hover:underline'
         >
           <ArrowLeftIcon className='mr-1 mt-1 h-4 w-4' /> Back to sign in

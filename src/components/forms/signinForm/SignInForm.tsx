@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useAuth } from '@/contexts';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 export const SignInForm: React.FC = () => {
   const {
@@ -16,15 +17,17 @@ export const SignInForm: React.FC = () => {
   const { signin } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
+  const router = useRouter();
+
   const onSubmit = async (data: any) => {
     try {
       await signin(data);
       toast.success('Login successful');
+      router.push('');
     } catch (error) {
       toast.error('Login failed');
       console.log(error);
     }
-    console.log('Success:', data);
   };
 
   return (
@@ -53,7 +56,7 @@ export const SignInForm: React.FC = () => {
             <label htmlFor='password' className='text-gray-800'>
               Password
             </label>
-            <Link href='/userauth/forgotpassword'>
+            <Link href='/forgotpassword'>
               <span className='text-blue-600 hover:underline'>
                 Forgot Password?
               </span>
@@ -106,7 +109,7 @@ export const SignInForm: React.FC = () => {
       <p className='mt-4 text-center text-sm text-gray-700'>
         {'Create an account '}
         <Link
-          href='/userauth/signup'
+          href='/signup'
           className='font-medium text-blue-600 hover:underline'
         >
           Signup

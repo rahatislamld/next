@@ -28,7 +28,7 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
       const ret = await forgotPasswordOtp(email, otpString);
       toast.success(ret?.message ?? 'OTP submitted successfully');
       localStorage.setItem('userotp', otpString);
-      router.push(`/userauth/setpassword?email=${email}`);
+      router.push(`/setpassword?email=${email}`);
     } catch (error: any) {
       toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log('Error:', error);
@@ -136,7 +136,7 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
       <p className='mt-4 text-center text-sm text-gray-700'>
         {'Create an account '}
         <Link
-          href='/userauth/signup'
+          href='/signup'
           className='font-medium text-blue-600 hover:underline'
         >
           Signup
