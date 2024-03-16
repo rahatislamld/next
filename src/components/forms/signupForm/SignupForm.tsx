@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import GoogleIcons from '@/components/svg/google';
 
 export const SignupForm: React.FC = () => {
   const {
@@ -136,7 +137,10 @@ export const SignupForm: React.FC = () => {
           </div>
         </form>
         <div className='relative mt-6 flex w-full items-center justify-center border border-t'>
-          <div className='absolute bg-gray-100 px-5 text-black'>Or</div>
+          <Link href='/signin' className='flex items-center gap-x-2'>
+            <GoogleIcons />
+            Continue with Google
+          </Link>
         </div>
         <p className='mt-4 text-center text-sm text-gray-700'>
           Already have an account?{' '}

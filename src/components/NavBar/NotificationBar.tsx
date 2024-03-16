@@ -3,7 +3,6 @@ import { BellIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
 
-// Dummy notification array
 const notifications = [
   { id: 1, title: 'Notification 1', date: '2024-03-14', unread: true },
   { id: 2, title: 'Notification 2', date: '2024-03-13', unread: false },
@@ -11,7 +10,6 @@ const notifications = [
   { id: 1, title: 'Notification 1', date: '2024-03-14', unread: true },
   { id: 1, title: 'Notification 1', date: '2024-03-14', unread: true },
   { id: 2, title: 'Notification 7', date: '2024-03-13', unread: false },
-  // Add more dummy notifications as needed
 ];
 
 export default function NotificationBar() {
@@ -42,7 +40,6 @@ export default function NotificationBar() {
           leaveTo='transform opacity-0 scale-95'
         >
           <Menu.Items className='max-h-100 absolute right-0 mt-2 w-80 origin-top-right divide-y divide-gray-100 overflow-y-auto rounded-md bg-white px-5 py-3 shadow-lg ring-1 ring-green-50 focus:outline-none'>
-            {/* Headless UI tabs */}
             <div className='flex'>
               <Menu.Item>
                 {() => (
