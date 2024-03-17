@@ -82,66 +82,68 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
   };
 
   return (
-    <div className='space-y-6 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-        <div className='max-w-md'>
-          <div className='mb-3 flex flex-col items-center space-y-4'>
-            <div className='rounded-full bg-green-50 p-3'>
-              <div className='rounded-full bg-green-100 p-3'>
-                <EnvelopeClosedIcon className='h-8 w-8 ' />
+    <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+      <div className='rounded-md bg-white px-10 py-6 sm:mx-auto sm:w-full sm:max-w-sm'>
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+          <div className='max-w-md'>
+            <div className='mb-3 flex flex-col items-center space-y-4'>
+              <div className='rounded-full bg-green-50 p-3'>
+                <div className='rounded-full bg-green-100 p-3'>
+                  <EnvelopeClosedIcon className='h-8 w-8 ' />
+                </div>
               </div>
+              <h2 className='text-2xl font-semibold'>Check your email</h2>
+              <p className='text-[12px]'>
+                We have sent a verification code to {email}
+              </p>
             </div>
-            <h2 className='text-2xl font-semibold'>Check your email</h2>
-            <p className='text-[12px]'>
-              We have sent a verification code to {email}
-            </p>
-          </div>
-          <div className='flex space-x-2'>
-            {[...Array(OTP_SIZE)].map((_, index: number) => (
-              <input
-                key={index}
-                id={`otp${index + 1}`}
-                type='text'
-                maxLength={1}
-                {...register(`otp${index + 1}`, {
-                  required: true,
-                  maxLength: 1,
-                  minLength: 1,
-                })}
-                className='mt-2 flex w-1/4 items-center justify-center rounded-md border bg-white px-2 py-2 text-center text-3xl font-semibold text-[#036c3c]  focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-                onChange={(e) => handleInputChange(e, index + 1)}
-                // ref={index === 0 ? firstInputRef : undefined}
-                onPaste={handlePaste}
-              />
-            ))}
-          </div>
+            <div className='flex space-x-2'>
+              {[...Array(OTP_SIZE)].map((_, index: number) => (
+                <input
+                  key={index}
+                  id={`otp${index + 1}`}
+                  type='text'
+                  maxLength={1}
+                  {...register(`otp${index + 1}`, {
+                    required: true,
+                    maxLength: 1,
+                    minLength: 1,
+                  })}
+                  className='mt-2 flex w-1/4 items-center justify-center rounded-md border bg-white px-2 py-2 text-center text-3xl font-semibold text-[#036c3c]  focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
+                  onChange={(e) => handleInputChange(e, index + 1)}
+                  // ref={index === 0 ? firstInputRef : undefined}
+                  onPaste={handlePaste}
+                />
+              ))}
+            </div>
 
-          {isAllOTPFilled() && (
-            <p className='text-red-500'>
-              Please enter all {OTP_SIZE} OTP digits
-            </p>
-          )}
+            {isAllOTPFilled() && (
+              <p className='text-red-500'>
+                Please enter all {OTP_SIZE} OTP digits
+              </p>
+            )}
+          </div>
+          <input
+            type='submit'
+            value='Submit'
+            className='my-6 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
+          />
+        </form>
+
+        <div className='relative my-6 flex w-full items-center justify-center border border-t'>
+          <div className='absolute bg-gray-100 px-5 text-black'>Or</div>
         </div>
-        <input
-          type='submit'
-          value='Submit'
-          className='my-6 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-3 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
-        />
-      </form>
 
-      <div className='relative my-6 flex w-full items-center justify-center border border-t'>
-        <div className='absolute bg-gray-100 px-5 text-black'>Or</div>
+        <p className='mt-4 text-center text-sm text-gray-700'>
+          {'Create an account '}
+          <Link
+            href='/signup'
+            className='font-medium text-blue-600 hover:underline'
+          >
+            Signup
+          </Link>
+        </p>
       </div>
-
-      <p className='mt-4 text-center text-sm text-gray-700'>
-        {'Create an account '}
-        <Link
-          href='/signup'
-          className='font-medium text-blue-600 hover:underline'
-        >
-          Signup
-        </Link>
-      </p>
     </div>
   );
 };

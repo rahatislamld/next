@@ -6,7 +6,7 @@ const GoogleIcons: React.FC = () => {
       xmlns='http://www.w3.org/2000/svg'
       x='0px'
       y='0px'
-      className='h-8 w-8'
+      className='h-6 w-6'
       viewBox='0 0 48 48'
     >
       <path
