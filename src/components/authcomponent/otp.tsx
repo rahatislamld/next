@@ -13,7 +13,12 @@ interface FormData {
   [key: string]: string;
 }
 
-export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
+interface Props {
+  email: string;
+  isVerifyOnly: boolean;
+}
+
+export const OTPForm: React.FC<Props> = ({ email, isVerifyOnly }) => {
   const {
     register,
     handleSubmit,
@@ -25,10 +30,14 @@ export const OTPForm: React.FC<{ email: string }> = ({ email }) => {
   const onSubmit = async (data: any) => {
     try {
       const otpString = Object.values(data).join('');
-      const ret = await forgotPasswordOtp(email, otpString);
+      const ret = await forgotPasswordOtp(email, otpString, isVerifyOnly);
       toast.success(ret?.message ?? 'OTP submitted successfully');
-      localStorage.setItem('userotp', otpString);
-      router.push(`/setpassword?email=${email}`);
+      if (isVerifyOnly) {
+        router.push(`/signin`);
+      } else {
+        localStorage.setItem('userotp', otpString);
+        router.push(`/setpassword?email=${email}`);
+      }
     } catch (error: any) {
       toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log('Error:', error);

@@ -24,8 +24,11 @@ export const SignInForm: React.FC = () => {
       await signin(data);
       toast.success('Login successful');
       router.push('');
-    } catch (error) {
-      toast.error('Login failed');
+    } catch (error: any) {
+      if (error.response?.data?.message === 'User not verified') {
+        router.push(`/otp?email=${data.email}&t=new`);
+      }
+      toast.error(error.response?.data?.message ?? 'Something went wrong');
       console.log(error);
     }
   };
@@ -67,7 +70,7 @@ export const SignInForm: React.FC = () => {
               id='password'
               type={showPassword ? 'text' : 'password'}
               autoComplete='new-password'
-              {...register('password', { required: true })}
+              {...register('password', { required: true, minLength: 6 })}
               className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
             />
             <button
@@ -78,8 +81,13 @@ export const SignInForm: React.FC = () => {
               {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
             </button>
           </div>
-          {errors.password && (
+          {errors.password?.type === 'required' && (
             <p className='text-red-500'>Password is required</p>
+          )}
+          {errors.password?.type === 'minLength' && (
+            <p className='text-red-500'>
+              Please try something more then 6 character
+            </p>
           )}
         </div>
 
