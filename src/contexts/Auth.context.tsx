@@ -37,9 +37,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const ret = await signupApi(values);
       if (ret?.status === 'success') {
         setIsLoggedIn(true);
-        localStorage.setItem(ACCESS_TOKEN_STORAGE, ret.accessToken);
-        if (ret.refreshToken)
-          localStorage.setItem(REFRESH_TOKEN_STORAGE, ret.refreshToken);
+        // localStorage.setItem(ACCESS_TOKEN_STORAGE, ret.accessToken);
+        // if (ret.refreshToken)
+        //   localStorage.setItem(REFRESH_TOKEN_STORAGE, ret.refreshToken);
         return true;
       } else {
         setIsLoggedIn(false);

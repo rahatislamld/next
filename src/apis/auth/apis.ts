@@ -100,8 +100,12 @@ export const forgetPassword = async (email: string) => {
   return response.data;
 };
 
-export const forgotPasswordOtp = async (email: string, otp: string) => {
-  const response = await axios.post(RECEIVE_OTP, { email, otp });
+export const forgotPasswordOtp = async (
+  email: string,
+  otp: string,
+  removeotp: boolean
+) => {
+  const response = await axios.post(RECEIVE_OTP, { email, otp, removeotp });
   return response.data;
 };
 

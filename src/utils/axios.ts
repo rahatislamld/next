@@ -3,7 +3,7 @@ import { ACCESS_TOKEN_STORAGE } from '@/constants';
 import Axios, { AxiosRequestConfig } from 'axios';
 
 export const axios = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URI,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URI}/api`,
   withCredentials: true,
 });
 

@@ -25,21 +25,19 @@ export const SignupForm: React.FC = () => {
     try {
       const res = await signup(data);
       if (res) {
-        toast.success('Successfull.');
-        router.push('/signin');
+        toast.success(`An email sent ${data.email}`);
+        router.push(`/otp?email=${data.email}&t=new`);
       } else {
         toast.error('Sign up failed1. Please try again.');
       }
     } catch (error: any) {
       console.log(error);
-      toast.error('Sign up failed.2 Please try again.');
-      // toast.error(error);
+      toast.error(error.response?.data?.message ?? 'Something went wrong');
     }
-    console.log('Success:', data);
   };
 
   // Watch the value of confirmPassword field
-  const confirmPassword = watch('confirmPassword');
+  const confirmPassword = watch('password');
 
   return (
     <>
@@ -89,7 +87,7 @@ export const SignupForm: React.FC = () => {
                     id='password'
                     type={showPassword ? 'text' : 'password'}
                     autoComplete='new-password'
-                    {...register('password', { required: true })}
+                    {...register('password', { required: true, minLength: 6 })}
                     className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
                   />
                   <button
@@ -100,8 +98,13 @@ export const SignupForm: React.FC = () => {
                     {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
                   </button>
                 </div>
-                {errors.password && (
+                {errors.password?.type === 'required' && (
                   <p className='text-red-500'>Password is required</p>
+                )}
+                {errors.password?.type === 'minLength' && (
+                  <p className='text-red-500'>
+                    Please try something more then 6 character
+                  </p>
                 )}
               </div>
 
@@ -111,7 +114,7 @@ export const SignupForm: React.FC = () => {
                 </label>
                 <input
                   id='confirmPassword'
-                  type='password'
+                  type={showPassword ? 'text' : 'password'}
                   autoComplete='new-password'
                   {...register('confirmPassword', {
                     required: true,

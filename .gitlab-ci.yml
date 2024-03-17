@@ -1,0 +1,42 @@
+stages:
+  - build_and_push
+  - deploy
+
+variables:
+  DOCKERHUB_USERNAME: factoryzeus
+  DOCKERHUB_IMAGE_NAME: banglarmath_frontend
+
+before_script:
+  - docker --version
+
+build-and-push-job:
+  stage: build_and_push
+  only:
+    - main
+  image: docker:20.10.11-dind
+  services:
+    - docker:20.10.11-dind
+  script:
+    - echo "Building and pushing the Docker image..."
+    - docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE_NAME:latest .
+    - echo "$CI_JOB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - docker push $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE_NAME:latest
+    - echo "Image successfully built and pushed to Docker Hub."
+
+deploy-job:
+  stage: deploy
+  only:
+    - main
+  before_script:
+    # Setup SSH deploy keys
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$VPS_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script:
+    - echo "Deploying application..."
+    - ssh "$VPS_USER"@"$VPS_HOST" -p 22 "docker-compose -f /home/factoryze/projects/banglarmath/docker-compose.yml pull && docker-compose -f /home/factoryze/projects/banglarmath/docker-compose.yml up -d"
+
+    - echo "Application successfully deployed."
