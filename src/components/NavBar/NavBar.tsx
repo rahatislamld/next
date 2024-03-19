@@ -1,97 +1,51 @@
-'use client';
-import { Disclosure } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import ProfileBar from './ProfileBar';
+import React from 'react';
 
-const NavBar: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('activeMenu') || 'signin';
-    }
-    return 'signin';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('activeMenu', activeMenu);
-  }, [activeMenu]);
-
-  const navigation = [
-    { name: 'SignUp', href: '/signup' },
-    { name: 'SignIn', href: '/signin' },
-  ];
-
-  const handleMenuClick = (name: string) => {
-    setActiveMenu(name);
-  };
-
+const NavBar = () => {
   return (
-    <Disclosure as='nav' className='bg-white shadow'>
-      {({ open }: any) => (
-        <>
-          <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-            <div className='flex h-16 justify-between'>
-              <div className='flex'>
-                <div className='flex flex-shrink-0 items-center'>
-                  <Image src={'/logo.png'} alt='logo' height={48} width={150} />
-                </div>
-              </div>
-              <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href} // Use href attribute for routing
-                    onClick={() => handleMenuClick(item.name)}
-                    className={`inline-flex items-center px-1 pt-1 text-sm font-semibold text-gray-500 hover:text-gray-700 ${
-                      activeMenu === item.name
-                        ? 'border-b-2 border-gray-500'
-                        : ''
-                    }`}
-                  >
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-              </div>
+    <div className='flex h-[90px] w-full flex-row items-center justify-between bg-[#002F5B] px-[80px] text-white'>
+      <div className='flex flex-row items-center justify-center gap-[8px]'>
+        <img src='/applogo.svg' className='h-[44px] w-[33px]' />
+        <div className='font-krona text-[18px] font-normal leading-[22px] text-[#FAFAFA]'>
+          AmarNeer
+        </div>
+      </div>
 
-              <div className='-mr-2 flex items-center sm:hidden'>
-                {/* Mobile menu button */}
-                <Disclosure.Button className='relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
-                  <span className='absolute -inset-0.5' />
-                  <span className='sr-only'>Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
-                  ) : (
-                    <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className='hidden items-center md:flex  '>
-                <ProfileBar />
-              </div>
-            </div>
-          </div>
+      <div className='flex flex-row gap-10'>
+        <a href='#' className='text-white'>
+          Home
+        </a>
+        <a href='#' className='text-white'>
+          My Accounts
+        </a>
+        <a href='#' className='text-white'>
+          Orders
+        </a>
+        <a href='#' className='text-white'>
+          Calculator
+        </a>
+        <a href='#' className='text-white'>
+          Feedback
+        </a>
+        <a href='#' className='text-white'>
+          Call Us
+        </a>
+        <a href='#' className='text-white'>
+          Mail Us
+        </a>
+      </div>
 
-          <Disclosure.Panel className='sm:hidden '>
-            <div className='space-y-1 pb-3 pt-2'>
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => handleMenuClick(item.name)}
-                  className={`block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:text-gray-700 ${
-                    activeMenu === item.name ? 'border-l-4 border-gray-500' : ''
-                  }`}
-                >
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+      <div>
+        <button className='mr-4 rounded-md border border-white bg-[#002F5B] px-4 py-2 text-white'>
+          Login
+        </button>
+        <button
+          className='rounded-md border border-white bg-orange-500 px-4 py-2 text-black'
+          style={{ height: '40px' }}
+        >
+          Sign Up free
+        </button>
+      </div>
+    </div>
   );
 };
 

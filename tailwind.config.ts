@@ -8,7 +8,16 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      Inter: ['Inter', 'sans-serif'],
+      Slab: ['Roboto Slab', 'sans-serif'],
+      Poppins: ['Poppins', 'sans-serif'],
+      Krona: ['Krona One', 'sans-serif'], // Add Krona One font
+    },
     extend: {
+      fontFamily: {
+        Krona: ['Krona One', 'sans-serif'],
+      },
       colors: {
         primaryColor: '#518581',
         secondaryColor: '#FFB23F',
@@ -27,4 +36,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
