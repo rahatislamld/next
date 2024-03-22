@@ -1,25 +1,26 @@
 'use client';
-import Link from 'next/link';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { EyeOpenIcon, EyeClosedIcon } from '@radix-ui/react-icons';
-import { useAuth } from '@/contexts';
 import Image from 'next/image';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '@/contexts';
 import { useRouter } from 'next/navigation';
-import GoogleIcons from '@/components/svg/google';
+import 'react-toastify/dist/ReactToastify.css';
 
-export const SignupForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm();
+  //const password = watch("password");
   const { signup } = useAuth();
-  const [showPassword, setShowPassword] = useState(false);
+  //const confirmPassword = watch("confirmPassword");
   const router = useRouter();
+
   const onSubmit = async (data: any) => {
     delete data.confirmPassword;
     try {
@@ -40,128 +41,122 @@ export const SignupForm: React.FC = () => {
   const confirmPassword = watch('password');
 
   return (
-    <>
-      <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
-        <div className='rounded-md bg-white px-10 py-6 sm:mx-auto sm:w-full sm:max-w-sm'>
-          <div className='mb-3 space-y-2'>
-            <Image src='/logo.png' alt='logo image' height={35} width={130} />
-            <h2 className='text-2xl font-semibold'>Sign up for an Account</h2>
-            <p className='text-sm'>
-              Create your account by filling out the information below
-            </p>
+    <div className='relative flex min-h-screen items-center justify-center bg-gray-100'>
+      {/* Background Image */}
+      <div className='absolute inset-y-0 right-0 hidden w-1/2 bg-amraneer bg-cover bg-center md:block'></div>
+
+      <div className='z-10 flex min-h-screen items-center justify-center bg-gray-100'>
+        <div className='w-full max-w-md rounded-lg bg-white p-8 shadow-md'>
+          <div className='mb-8 flex items-center justify-center'>
+            <div className='mb-4'>
+              <Image
+                src='/amarneer.png'
+                alt='logo image'
+                width={163}
+                height={43.81}
+              />
+            </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className='space-y-9'>
-            <div className='max-w-lg'>
-              <label htmlFor='name' className='text-gray-800'>
-                Name
+          <h2 className='mb-4 text-lg font-bold text-purple-900'>
+            Sign up to your Account
+          </h2>
+          <p className='mb-6 text-sm text-gray-600'>
+            Create your account with specific email/mobile number; we can easily
+            contact with you
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+            <div className='flex flex-col'>
+              <label
+                htmlFor='email'
+                className='text-sm font-semibold text-gray-900'
+              >
+                Email or Phone Number
               </label>
-              <input
-                id='name'
-                type='text'
-                autoComplete='name'
-                {...register('name', { required: true })}
-                className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-              />
-              {errors.name && <p className='text-red-500'>Name is required</p>}
-
-              <label htmlFor='email' className='mt-4 text-gray-800'>
-                Email
-              </label>
-              <input
-                id='email'
-                type='email'
-                autoComplete='email'
-                {...register('email', { required: true })}
-                className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-              />
-              {errors.email && (
-                <p className='text-red-500'>Email is required</p>
-              )}
-
-              <div className='relative'>
-                <label htmlFor='password' className='mt-4 text-gray-800'>
-                  Password
-                </label>
-                <div className='flex items-center'>
-                  <input
-                    id='password'
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete='new-password'
-                    {...register('password', { required: true, minLength: 6 })}
-                    className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-                  />
-                  <button
-                    type='button'
-                    onClick={() => setShowPassword(!showPassword)}
-                    className='absolute inset-y-0 right-0 top-8 flex items-center px-2 focus:outline-none'
-                  >
-                    {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-                  </button>
-                </div>
-                {errors.password?.type === 'required' && (
-                  <p className='text-red-500'>Password is required</p>
-                )}
-                {errors.password?.type === 'minLength' && (
-                  <p className='text-red-500'>
-                    Please try something more then 6 character
-                  </p>
-                )}
-              </div>
-
-              <div className='relative'>
-                <label htmlFor='confirmPassword' className='mt-4 text-gray-800'>
-                  Confirm Password
-                </label>
+              <div className='flex items-center rounded-lg border border-gray-300'>
                 <input
-                  id='confirmPassword'
+                  id='email'
+                  type='text'
+                  className={`px-4 py-2 focus:outline-none ${errors.email ? 'border-red-500' : 'border-blue-500'}`}
+                  {...register('email', { required: true })}
+                />
+              </div>
+              {errors.email && (
+                <p className='text-xs text-red-500'>Email is required</p>
+              )}
+            </div>
+            <div className='relative flex flex-col'>
+              <label
+                htmlFor='password'
+                className='text-sm font-semibold text-gray-900'
+              >
+                Password
+              </label>
+              <div className='flex items-center rounded-lg border border-gray-300'>
+                <input
+                  id='password'
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete='new-password'
-                  {...register('confirmPassword', {
-                    required: true,
-                    validate: (value) =>
-                      value === confirmPassword || 'The passwords do not match',
-                  })}
-                  className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
+                  className={`px-4 py-2 focus:outline-none ${errors.password ? 'border-red-500' : 'border-blue-500'}`}
+                  {...register('password', { required: true })}
                 />
                 <button
                   type='button'
                   onClick={() => setShowPassword(!showPassword)}
-                  className='absolute inset-y-0 right-0 top-8 flex items-center px-2 focus:outline-none'
+                  className='absolute inset-y-0 right-0 flex items-center px-4'
                 >
-                  {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+                  {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
                 </button>
-                {errors.confirmPassword && (
-                  <p className='text-red-500'>Passwords do not match</p>
-                )}
               </div>
-
-              <input
-                type='submit'
-                className='mt-4 w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-2 text-white  transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
-                value='Sign Up'
-              />
+              {errors.password && (
+                <p className='text-xs text-red-500'>Password is required</p>
+              )}
             </div>
+            <div className='relative'>
+              <label htmlFor='confirmPassword' className='mt-4 text-gray-800'>
+                Confirm Password
+              </label>
+              <input
+                id='confirmPassword'
+                type={showPassword ? 'text' : 'password'}
+                autoComplete='new-password'
+                {...register('confirmPassword', {
+                  required: true,
+                  validate: (value) =>
+                    value === confirmPassword || 'The passwords do not match',
+                })}
+                className='mt-2 block w-full rounded-md border border-red-500 bg-white px-4 py-2 text-gray-700 focus:border-2 focus:outline-none focus:ring-0'
+              />
+              <button
+                type='button'
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute inset-y-0 right-0 top-8 flex items-center px-2 focus:outline-none'
+              >
+                {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </button>
+              {errors.confirmPassword && (
+                <p className='text-red-500'>Passwords do not match</p>
+              )}
+            </div>
+
+            <button
+              type='submit'
+              className='mt-4 w-full rounded-lg bg-orange-500 py-2 font-semibold text-white'
+            >
+              Sign Up
+            </button>
           </form>
-          <div className='relative mt-6 flex w-full items-center justify-center rounded-md border border-t'>
-            <Link
-              href='/signin'
-              className='flex items-center gap-x-2  py-2 text-[14px] text-gray-500'
+          <div className='mt-4 flex items-center'>
+            <p className='text-sm text-gray-600'>Already have an account?</p>
+            <a
+              href='./signin'
+              className='ml-1 text-sm font-semibold text-blue-600'
             >
-              <GoogleIcons />
-              Continue with Google
-            </Link>
+              Sign in
+            </a>
           </div>
-          <p className='mt-4 text-center text-sm text-gray-700'>
-            Already have an account?{' '}
-            <Link
-              href='/signin'
-              className='font-medium text-blue-600 hover:underline'
-            >
-              SignIn
-            </Link>
-          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
+
+export { SignUpForm };

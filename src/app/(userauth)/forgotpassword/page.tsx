@@ -1,4 +1,4 @@
-import { ForgotPasswordForm } from '@/components/authcomponent/forgotpassword';
+import { ForgotPasswordForm } from '@/components/forms/forgetpasswordForm';
 import React from 'react';
 
 const SendOTP = () => {
