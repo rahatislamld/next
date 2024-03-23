@@ -49,27 +49,26 @@ const Homepage = () => {
       {/* hero section */}
       <div className='flex w-full flex-col items-center bg-[#022950]'>
         {/* text div */}
-        <div className='flex max-w-[400px] flex-col py-[100px] text-center'>
+        <div className='flex max-w-[500px] flex-col py-[100px] text-center'>
           <h4
             className='text-white'
             style={{ fontSize: '64px', lineHeight: '70px' }}
           >
             Elevate Your
           </h4>
-          <div
+          <p
             className='text-orange-500'
             style={{
               fontSize: '64px',
               lineHeight: '70px',
               whiteSpace: 'nowrap',
-              marginLeft: '-60px',
             }}
           >
             Living Experience
-          </div>
+          </p>
           <br />
           <br />
-          <div className='text-white'>
+          <div className='tracking-wider text-white'>
             Embark on a journey where sophistication meets serenity. Our
             meticulously curated real estate offerings redefine the essence of
             home, providing not just a residence but an elevated lifestyle.
@@ -79,12 +78,12 @@ const Homepage = () => {
               className='flex items-center rounded-lg bg-gray-200 p-0'
               style={{ paddingLeft: '35px', paddingRight: '5px' }}
             >
-              <div className='bg-white-600 mr-10 flex h-12 w-12 items-center justify-center rounded-full font-semibold text-black'>
+              <div className='bg-white-600 mr-10 flex h-12 w-12 items-center justify-center rounded-full text-black'>
                 (02)61890388
               </div>
               <button
                 type='button'
-                className='inline-flex items-center gap-x-2 rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                className='inline-flex items-center gap-x-2 rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
               >
                 Call Now
               </button>
@@ -98,7 +97,7 @@ const Homepage = () => {
       </div>
 
       {/* services sections */}
-      <div className='bg-custom-gray flex flex h-[840px] w-full flex-col items-center justify-center'>
+      <div className='bg-custom-gray flex h-[840px] w-full flex-col items-center justify-center'>
         <br />
         <br />
         <div className='mb-8 rounded-full bg-orange-100 p-2 text-center'>
@@ -118,7 +117,7 @@ const Homepage = () => {
               .map((card, index) => (
                 <div
                   key={index}
-                  className='flex flex-col items-center gap-y-2 rounded-xl bg-white p-4 shadow-xl'
+                  className='flex cursor-pointer flex-col items-center gap-y-2 rounded-xl bg-white p-4 shadow-xl transition-transform duration-300 ease-in-out hover:scale-105'
                 >
                   <img
                     src={card.imageUrl}
@@ -136,12 +135,12 @@ const Homepage = () => {
             {!showAllCards && (
               <div
                 onClick={handleShowMoreClick}
-                className='flex cursor-pointer flex-col items-center justify-center rounded-lg bg-[#022950] p-4 shadow-md'
+                className='flex cursor-pointer flex-col items-center justify-center rounded-lg bg-[#022950] p-4 text-white underline-offset-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-orange-500 hover:underline'
               >
-                <h2 className='text-center text-xl font-semibold text-white'>
+                <h2 className='text-center text-xl font-semibold'>
                   12+ Services{' '}
                 </h2>
-                <p className='text-center text-white '>You Can explore</p>
+                <p className='text-center'>You Can explore</p>
               </div>
             )}
           </div>
