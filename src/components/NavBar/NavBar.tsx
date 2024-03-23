@@ -2,7 +2,7 @@ import React from 'react';
 
 const NavBar = () => {
   return (
-    <div className='flex h-[90px] w-full flex-row items-center justify-between bg-[#002F5B] px-[80px] text-white'>
+    <div className='fixed flex h-[90px] w-full flex-row items-center justify-between bg-[#002F5B] px-[80px] text-white'>
       <div className='flex flex-row items-center justify-center gap-[8px]'>
         <a href='#'>
           <img src='/applogo.svg' className='h-[44px] w-[33px]' />
@@ -15,26 +15,26 @@ const NavBar = () => {
         </a>
       </div>
 
-      <div className='flex flex-row gap-10'>
-        <a href='#' className='text-white'>
+      <div className='flex flex-row gap-10 text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Home
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           My Accounts
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Orders
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Calculator
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Feedback
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Call Us
         </a>
-        <a href='#' className='text-white'>
+        <a href='#' className='hover:text-orange-500'>
           Mail Us
         </a>
       </div>
