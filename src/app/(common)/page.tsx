@@ -163,20 +163,20 @@ const Homepage = () => {
         <br />
         <br />
 
-        <div className='absolute flex w-full flex-row items-center bg-gradient-to-r from-green-500 to-green-400'>
-          <div className='w-1/2'>
+        <div className='flex w-full flex-row items-center bg-gradient-to-r from-green-500 to-green-400'>
+          <div className='w-2/3 rounded-lg'>
             <div className='font-inter relative mx-auto flex h-[369px] w-[713px] items-center justify-center text-base font-normal leading-7 text-white'>
               Welcome to AmarNeer, where innovation meets real estate
               excellence. As industry leaders, we redefine the way you
               experience property. With a commitment to integrity and client
               satisfaction, we specialize in delivering tailored solutions that
               transform houses into dream homes and investments into success
-              stories. At AmarNeer, we don&#39t just sell properties; we craft
+              stories. At AmarNeer, we dont just sell properties; we craft
               experiences and build lasting relationships. Join us in shaping
               the future of real estate – where your vision becomes our mission.
             </div>
           </div>
-          <div className='flex w-1/2 items-center justify-center'>
+          <div className='rounder-lg flex w-1/3 items-center justify-center bg-white'>
             <img src='/who.svg' className='h-[598px] w-[457px]' />
           </div>
         </div>

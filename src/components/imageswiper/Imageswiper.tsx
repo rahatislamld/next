@@ -1,49 +1,65 @@
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
 
-const Imageswiper = () => {
-  // Dummy image data
-  const images = [
-    '/building1.jpeg',
-    '/house1.jpeg',
-    '/house2.jpeg',
-    '/building1.jpeg',
-    '/house1.jpeg',
-    '/house2.jpeg',
-    '/house1.jpeg',
-    '/house1.jpeg',
-    '/house2.jpeg',
-    '/house1.jpeg',
-    // Add more image paths as needed
-  ];
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
+function App() {
   return (
     <div className='container'>
-      <h1 className='heading'>Flower Gallery</h1>
       <Swiper
-        // Install Swiper modules
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={50}
-        slidesPerView={4}
-        effect='coverflow'
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={5}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5,
+        }}
+        pagination={{ el: '.swiper-pagination', clickable: true }}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          clickable: true,
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className='swiper_container'
       >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <img src={image} alt={`Slide ${index + 1}`} />
-          </SwiperSlide>
-        ))}
+        <SwiperSlide>
+          <img src='./house1.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./house2.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./building1.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./house1.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./house1.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./house1.jpeg' alt='slide_image' />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='./house1.jpeg' alt='slide_image' />
+        </SwiperSlide>
       </Swiper>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
-};
+}
 
-export default Imageswiper;
+export default App;
