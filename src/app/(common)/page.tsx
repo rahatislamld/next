@@ -219,7 +219,7 @@ const Homepage = () => {
         <br />
         <br />
         <br />
-        <div className='top-420 flex h-[163px]  w-[888px] flex-row  items-center gap-52 '>
+        <div className='items-centertop-420 flex flex flex h-[163px] w-[888px]  flex-row justify-center gap-52 '>
           <div className='order-0 flex h-[157.39px] w-[128px] flex-grow-0 flex-col items-center'>
             <img
               src='/applogo.svg'
