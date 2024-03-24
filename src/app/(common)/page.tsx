@@ -1,4 +1,5 @@
 'use client';
+import Imageswiper from '@/components/imageswiper/Imageswiper';
 import React from 'react';
 
 const Homepage = () => {
@@ -94,11 +95,12 @@ const Homepage = () => {
         {/* carousel div */}
         <div className='carousel'>
           {/* Add your carousel component or content here */}
+          <Imageswiper />
         </div>
       </div>
 
       {/* services sections */}
-      <div className='bg-custom-gray flex flex h-[840px] w-full flex-col items-center justify-center'>
+      <div className='bg-custom-gray flex h-[840px] w-full flex-col items-center justify-center'>
         <br />
         <br />
         <div className='mb-8 rounded-full bg-orange-100 p-2 text-center'>
@@ -148,10 +150,82 @@ const Homepage = () => {
         </div>
       </div>
       {/* map sections */}
-      <div className='map'></div>
+      <div className='w-full'></div>
       {/* who we are section */}
-      <div className='who-we-are'>
-        {/* Add your "who we are" section content here */}
+      <div className='who-we-are'></div>
+      <div className='h-[710px] w-full items-center bg-blue-900'>
+        <div className='relative top-16 ml-[.375rem] flex items-center justify-center'>
+          <div className='flex h-[225px] w-[628px] flex-col items-center justify-center py-[100px]'>
+            <div className='font-inter leading-29 text-center text-[24px] font-extrabold font-semibold text-orange-500'>
+              Do you want to sponsor us?
+            </div>
+            <br />
+            <div className='font-inter h-[96px] w-[628px] text-center text-base font-normal leading-8 text-white'>
+              Embark on a journey where sophistication meets serenity. Our
+              meticulously curated real estate offerings redefine the essence of
+              home, providing not just a residence but an elevated lifestyle.
+            </div>
+            <br />
+            <div className='mt-4 flex justify-center gap-4'>
+              <button className='flex h-[52px] w-[193px] items-center justify-center gap-4 rounded-lg border border-blue-300 bg-blue-900 p-4 text-white'>
+                Login
+              </button>
+              <button className='flex h-[52px] w-[193px] items-center justify-center gap-4 rounded-lg border border-orange-300 bg-orange-500 p-4'>
+                Sign Up
+              </button>
+            </div>
+            {/* Horizontal Line */}
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className='top-420 flex h-[163px]  w-[888px] flex-row  items-center gap-52 '>
+          <div className='order-0 flex h-[157.39px] w-[128px] flex-grow-0 flex-col items-center'>
+            <img
+              src='/applogo.svg'
+              alt='Logo'
+              className='h-[120.41px] w-[73.02px]'
+            />
+            <p className='mt-2 text-center text-white'>AmarNeer</p>
+          </div>
+          <div className='flex h-[163px] w-[301px] flex-col items-start gap-6'>
+            <div className='font-inter h-[19px] w-[48px] text-base font-semibold leading-4 text-white'>
+              About
+            </div>
+
+            <div className='font-inter h-[120px] w-[302px] text-base font-normal leading-6 text-white'>
+              Welcome to AmarNeer, where innovation meets real estate
+              excellence. As industry leaders, we redefine the way you
+              experience property.
+            </div>
+          </div>
+          <div className='flex h-[147px] w-[192px] flex-col items-start gap-6'>
+            <div className='font-inter h-[19px] w-[63px] text-base font-semibold leading-4 text-white'>
+              Support
+            </div>
+            <div className='flex h-[104px] w-[193px] flex-col items-start gap-4'>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Support Request
+              </div>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Contact Us
+              </div>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Help Centre
+              </div>
+            </div>
+          </div>
+          <div className=' ml-auto flex h-[67px] w-[111px] flex-col items-start gap-[16px]'>
+            <div className='font-inter order-0 h-[19px] w-[73px] flex-none font-semibold text-white'>
+              Follow us
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
