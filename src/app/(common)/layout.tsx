@@ -21,7 +21,7 @@ export default function RootLayout({
         <Theme accentColor='red'>
           <Providers>
             <NavBar />
-            <main className='bg-[#ecede8]'>{children}</main>
+            <main className='bg-[#ecede8] pt-[90px]'>{children}</main>
           </Providers>
           <ToastContainer />
         </Theme>
