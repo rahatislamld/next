@@ -149,44 +149,39 @@ const Homepage = () => {
         </div>
       </div>
       {/* map sections */}
-      <div className='w-full'></div>
+
       {/* who we are section */}
 
-      <div className='relative h-[983px] w-full bg-gray-200'>
+      <div className='relative h-[983px] w-full'>
+        <br />
+
+        <h3 className='font-inter text-center text-4xl font-bold leading-7 text-orange-500'>
+          <span className='text-[#002F5B]'>Who</span> we are?
+        </h3>
+        <br />
         <br />
         <br />
         <br />
 
-        <div className='absolute flex w-full justify-center'>
-          <h3 className='font-inter text-2xl font-bold leading-7 text-orange-500'>
-            Who we are?
-          </h3>
-        </div>
-
-        <div className='absolute flex w-full'>
+        <div className='absolute flex w-full flex-row items-center bg-gradient-to-r from-green-500 to-green-400'>
           <div className='w-1/2'>
-            <div className='w-713 h-369 top-396 font-inter absolute left-16 text-base font-normal leading-7 text-white'>
+            <div className='font-inter relative mx-auto flex h-[369px] w-[713px] items-center justify-center text-base font-normal leading-7 text-white'>
               Welcome to AmarNeer, where innovation meets real estate
               excellence. As industry leaders, we redefine the way you
               experience property. With a commitment to integrity and client
               satisfaction, we specialize in delivering tailored solutions that
               transform houses into dream homes and investments into success
-              stories. At AmarNeer, we don&#39;t just sell properties; we craft
+              stories. At AmarNeer, we don&#39t just sell properties; we craft
               experiences and build lasting relationships. Join us in shaping
               the future of real estate – where your vision becomes our mission.
             </div>
           </div>
-
-          <div className='w-1/2'>
-            <img
-              src='/who.svg'
-              className='top-245 absolute right-16 h-[598px] w-[457px]'
-            />
+          <div className='flex w-1/2 items-center justify-center'>
+            <img src='/who.svg' className='h-[598px] w-[457px]' />
           </div>
         </div>
       </div>
 
-      <div className='who-we-are'></div>
       <div className='h-[710px] w-full items-center bg-blue-900'>
         <div className='relative top-16 ml-[.375rem] flex items-center justify-center'>
           <div className='flex h-[225px] w-[628px] flex-col items-center justify-center py-[100px]'>
@@ -217,46 +212,48 @@ const Homepage = () => {
         <br />
         <br />
         <br />
-        <br />
-        <div className='items-centertop-420 flex flex flex h-[163px] w-[888px]  flex-row justify-center gap-52 '>
-          <div className='order-0 flex h-[157.39px] w-[128px] flex-grow-0 flex-col items-center'>
-            <img
-              src='/applogo.svg'
-              alt='Logo'
-              className='h-[120.41px] w-[73.02px]'
-            />
-            <p className='mt-2 text-center text-white'>AmarNeer</p>
-          </div>
-          <div className='flex h-[163px] w-[301px] flex-col items-start gap-6'>
-            <div className='font-inter h-[19px] w-[48px] text-base font-semibold leading-4 text-white'>
-              About
-            </div>
 
-            <div className='font-inter h-[120px] w-[302px] text-base font-normal leading-6 text-white'>
-              Welcome to AmarNeer, where innovation meets real estate
-              excellence. As industry leaders, we redefine the way you
-              experience property.
+        <div>
+          <div className='flex h-[163px]  w-[888px] flex-row  items-center  gap-52 '>
+            <div className='right-100 flex flex-col'>
+              <img
+                src='/applogo.svg'
+                alt='Logo'
+                className='h-[120.41px] w-[73.02px]'
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+              <p className='mt-2 text-center text-white'>AmarNeer</p>
             </div>
-          </div>
-          <div className='flex h-[147px] w-[192px] flex-col items-start gap-6'>
-            <div className='font-inter h-[19px] w-[63px] text-base font-semibold leading-4 text-white'>
-              Support
-            </div>
-            <div className='flex h-[104px] w-[193px] flex-col items-start gap-4'>
-              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                Support Request
+            <div className='flex h-[163px] w-[301px] flex-col items-start gap-6'>
+              <div className='font-inter h-[19px] w-[48px] text-base font-semibold leading-4 text-white'>
+                About
               </div>
-              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                Contact Us
-              </div>
-              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                Help Centre
+              <div className='font-inter h-[120px] w-[302px] text-base font-normal leading-6 text-white'>
+                Welcome to AmarNeer, where innovation meets real estate
+                excellence. As industry leaders, we redefine the way you
+                experience property.
               </div>
             </div>
-          </div>
-          <div className=' ml-auto flex h-[67px] w-[111px] flex-col items-start gap-[16px]'>
-            <div className='font-inter order-0 h-[19px] w-[73px] flex-none font-semibold text-white'>
-              Follow us
+            <div className='flex h-[147px] w-[192px] flex-col items-start gap-6'>
+              <div className='font-inter h-[19px] w-[63px] text-base font-semibold leading-4 text-white'>
+                Support
+              </div>
+              <div className='flex h-[104px] w-[193px] flex-col items-start gap-4'>
+                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                  Support Request
+                </div>
+                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                  Contact Us
+                </div>
+                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                  Help Centre
+                </div>
+              </div>
+            </div>
+            <div className='flex h-[67px] w-[111px] flex-col items-start gap-[16px]'>
+              <div className='font-inter order-0 h-[19px] w-[73px] flex-none font-semibold text-white'>
+                Follow us
+              </div>
             </div>
           </div>
         </div>
