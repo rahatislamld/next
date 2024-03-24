@@ -152,6 +152,41 @@ const Homepage = () => {
       {/* map sections */}
       <div className='w-full'></div>
       {/* who we are section */}
+
+      <div className='relative h-[983px] w-full bg-gray-200'>
+        <br />
+        <br />
+        <br />
+
+        <div className='absolute flex w-full justify-center'>
+          <h3 className='font-inter text-2xl font-bold leading-7 text-orange-500'>
+            Who we are?
+          </h3>
+        </div>
+
+        <div className='absolute flex w-full'>
+          <div className='w-1/2'>
+            <div className='w-713 h-369 top-396 font-inter absolute left-16 text-base font-normal leading-7 text-white'>
+              Welcome to AmarNeer, where innovation meets real estate
+              excellence. As industry leaders, we redefine the way you
+              experience property. With a commitment to integrity and client
+              satisfaction, we specialize in delivering tailored solutions that
+              transform houses into dream homes and investments into success
+              stories. At AmarNeer, we don&#39;t just sell properties; we craft
+              experiences and build lasting relationships. Join us in shaping
+              the future of real estate – where your vision becomes our mission.
+            </div>
+          </div>
+
+          <div className='w-1/2'>
+            <img
+              src='/who.svg'
+              className='top-245 absolute right-16 h-[598px] w-[457px]'
+            />
+          </div>
+        </div>
+      </div>
+
       <div className='who-we-are'></div>
       <div className='h-[710px] w-full items-center bg-blue-900'>
         <div className='relative top-16 ml-[.375rem] flex items-center justify-center'>
