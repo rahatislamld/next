@@ -1,5 +1,6 @@
 'use client';
 import Imageswiper from '@/components/imageswiper/Imageswiper';
+//import Map from '@/components/map/Map';
 import { FaFacebook, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import React from 'react';
 
@@ -47,7 +48,7 @@ const Homepage = () => {
   };
 
   return (
-    <div className='flex w-full flex-col'>
+    <div className='flex w-full flex-col bg-gray-100'>
       {/* hero section */}
       <div className='flex w-full flex-col items-center bg-[#022950]'>
         {/* text div */}
@@ -152,6 +153,9 @@ const Homepage = () => {
       <br />
       <br />
       {/* map sections */}
+      <div className='w-full bg-gray-300'>
+        <img src='/location.jpg' className='h-[1080px] w-full' />
+      </div>
 
       {/* who we are section */}
 
