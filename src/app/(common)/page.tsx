@@ -1,5 +1,6 @@
 'use client';
 import Imageswiper from '@/components/imageswiper/Imageswiper';
+import { FaFacebook, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import React from 'react';
 
 const Homepage = () => {
@@ -148,14 +149,16 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
       {/* map sections */}
 
       {/* who we are section */}
 
-      <div className='relative h-[983px] w-full'>
+      <div className='ml-60 h-[883px] w-[1281px]'>
         <br />
 
-        <h3 className='font-inter text-center text-4xl font-bold leading-7 text-orange-500'>
+        <h3 className='font-inter text-center text-5xl font-bold leading-7 text-orange-500'>
           <span className='text-[#002F5B]'>Who</span> we are?
         </h3>
         <br />
@@ -163,20 +166,25 @@ const Homepage = () => {
         <br />
         <br />
 
-        <div className='flex w-full flex-row items-center bg-gradient-to-r from-green-500 to-green-400'>
-          <div className='w-2/3 rounded-lg'>
-            <div className='font-inter relative mx-auto flex h-[369px] w-[713px] items-center justify-center text-base font-normal leading-7 text-white'>
+        <div className='flex w-full flex-row items-center justify-center'>
+          <div className='h-[598px] w-2/3 overflow-hidden rounded-3xl bg-gradient-to-r from-green-500 to-green-400'>
+            <br />
+            <div className='font-inter relative mx-auto  mt-14 flex h-[369px] w-[713px] items-center justify-center text-base text-xl font-normal leading-7 text-white'>
+              <br />
               Welcome to AmarNeer, where innovation meets real estate
               excellence. As industry leaders, we redefine the way you
-              experience property. With a commitment to integrity and client
-              satisfaction, we specialize in delivering tailored solutions that
-              transform houses into dream homes and investments into success
-              stories. At AmarNeer, we dont just sell properties; we craft
-              experiences and build lasting relationships. Join us in shaping
-              the future of real estate – where your vision becomes our mission.
+              experience property.
+              <br /> <br />
+              With a commitment to integrity and client satisfaction, we
+              specialize in delivering tailored solutions that transform houses
+              into dream homes and investments into success stories.
+              <br /> <br />
+              At AmarNeer, we dont just sell properties; we craft experiences
+              and build lasting relationships. Join us in shaping the future of
+              real estate – where your vision becomes our mission.
             </div>
           </div>
-          <div className='rounder-lg flex w-1/3 items-center justify-center bg-white'>
+          <div className='flex w-1/3 items-center justify-center rounded-3xl bg-white'>
             <img src='/who.svg' className='h-[598px] w-[457px]' />
           </div>
         </div>
@@ -209,53 +217,59 @@ const Homepage = () => {
         <br />
         <br />
         <br />
+        <div className='top-356 absolute left-[calc(50%-640px)] mt-20 h-0 w-[1380px] border border-gray-300'></div>
+
         <br />
         <br />
         <br />
 
-        <div>
-          <div className='flex h-[163px]  w-[888px] flex-row  items-center  gap-52 '>
-            <div className='right-100 flex flex-col'>
-              <img
-                src='/applogo.svg'
-                alt='Logo'
-                className='h-[120.41px] w-[73.02px]'
-                style={{ maxWidth: '100%', height: 'auto' }}
-              />
-              <p className='mt-2 text-center text-white'>AmarNeer</p>
+        <div className='top-420px absolute left-[calc(50%-444px)] mt-20 flex h-[163px] w-[888px] flex-row items-start gap-[92px]'>
+          <div className='right-100 flex flex-col'>
+            <img
+              src='/applogo.svg'
+              alt='Logo'
+              className='h-[120.41px] w-[73.02px]'
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+            <p className='mt-2 text-center text-white'>AmarNeer</p>
+          </div>
+          <div className='flex h-[163px] w-[301px] flex-col items-start gap-6'>
+            <div className='font-inter h-[19px] w-[48px] text-base font-semibold leading-4 text-white'>
+              About
             </div>
-            <div className='flex h-[163px] w-[301px] flex-col items-start gap-6'>
-              <div className='font-inter h-[19px] w-[48px] text-base font-semibold leading-4 text-white'>
-                About
-              </div>
-              <div className='font-inter h-[120px] w-[302px] text-base font-normal leading-6 text-white'>
-                Welcome to AmarNeer, where innovation meets real estate
-                excellence. As industry leaders, we redefine the way you
-                experience property.
-              </div>
+            <div className='font-inter h-[120px] w-[302px] text-base font-normal leading-6 text-white'>
+              Welcome to AmarNeer, where innovation meets real estate
+              excellence. As industry leaders, we redefine the way you
+              experience property.
             </div>
-            <div className='flex h-[147px] w-[192px] flex-col items-start gap-6'>
-              <div className='font-inter h-[19px] w-[63px] text-base font-semibold leading-4 text-white'>
-                Support
-              </div>
-              <div className='flex h-[104px] w-[193px] flex-col items-start gap-4'>
-                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                  Support Request
-                </div>
-                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                  Contact Us
-                </div>
-                <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
-                  Help Centre
-                </div>
-              </div>
+          </div>
+          <div className='flex h-[147px] w-[192px] flex-col items-start gap-6'>
+            <div className='font-inter h-[19px] w-[63px] text-base font-semibold leading-4 text-white'>
+              Support
             </div>
-            <div className='flex h-[67px] w-[111px] flex-col items-start gap-[16px]'>
-              <div className='font-inter order-0 h-[19px] w-[73px] flex-none font-semibold text-white'>
-                Follow us
+            <div className='flex h-[104px] w-[193px] flex-col items-start gap-4'>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Support Request
+              </div>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Contact Us
+              </div>
+              <div className='font-inter h-[24px] w-[193px] text-base font-normal leading-6 text-white'>
+                Help Centre
               </div>
             </div>
           </div>
+          <div className='flex h-[67px] w-[111px] flex-col items-start gap-[16px]'>
+            <div className='font-inter order-0 h-[19px] w-[73px] flex-none font-semibold text-white'>
+              Follow us
+            </div>
+            <div className='flex h-[32px] w-[112px] flex-row items-start gap-8'>
+              <FaFacebook className='h-[32px] w-[32px] text-white' />
+              <FaLinkedin className='h-[32px] w-[32px] text-white' />
+              <FaWhatsapp className='h-[32px] w-[32px] text-white' />
+            </div>
+          </div>
+          <div className='top-356 absolute left-[calc(50%-640px)] mt-60 h-0 w-[1380px] border border-gray-300'></div>
         </div>
       </div>
     </div>
