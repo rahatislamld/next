@@ -1,5 +1,5 @@
 'use client';
-import Link from 'next/link';
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
@@ -23,7 +23,7 @@ export const SignInForm: React.FC = () => {
     try {
       await signin(data);
       toast.success('Login successful');
-      router.push('');
+      router.push(''); // Redirect to home page
     } catch (error: any) {
       if (error.response?.data?.message === 'User not verified') {
         router.push(`/otp?email=${data.email}&t=new`);
@@ -34,97 +34,117 @@ export const SignInForm: React.FC = () => {
   };
 
   return (
-    <div className='flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
-      <div className='rounded-md bg-white px-10 py-6 sm:mx-auto sm:w-full sm:max-w-sm'>
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
-          <div className=''>
-            <div className='mb-3 space-y-2'>
-              <Image src='/logo.png' alt='logo image' height={35} width={130} />
-              <h2 className='text-2xl font-semibold'>
-                Sign in to your Account
-              </h2>
-              <p className='text-sm text-gray-500'>
-                Use your email to log in to your account
-              </p>
+    <div className='flex min-h-screen items-center justify-center bg-gray-100'>
+      <div className='z-10 flex'>
+        <div className='w-full max-w-md rounded-l-lg bg-white p-8 shadow-md'>
+          <div className='justify-left mb-8 flex items-center'>
+            <div className='mb-4'>
+              <Image
+                src='/amarneer.png'
+                alt='logo image'
+                height={35}
+                width={130}
+              />
             </div>
-            <label htmlFor='email' className='text-gray-800'>
-              Email
-            </label>
-            <input
-              id='email'
-              type='email'
-              autoComplete='email'
-              {...register('email', { required: true })}
-              className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-            />
-            {errors.email && <p className='text-red-500'>Email is required</p>}
           </div>
-          <div className='relative'>
-            <div className='flex justify-between'>
-              <label htmlFor='password' className='text-gray-800'>
+          <h2 className='mb-4 text-lg font-bold text-purple-900'>
+            Log in to your Account
+          </h2>
+          <p className='mb-6 text-sm text-gray-600'>
+            Use your work email or phone number to log in to your account
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+            <div className='flex flex-col'>
+              <label
+                htmlFor='email'
+                className='text-sm font-semibold text-gray-900'
+              >
+                Email or Phone Number
+              </label>
+              <input
+                id='email'
+                type='text'
+                className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none`}
+                {...register('email', { required: true })}
+              />
+              {errors.email && (
+                <p className='text-xs text-red-500'>Email is required</p>
+              )}
+            </div>
+            <div className='relative flex flex-col'>
+              <label
+                htmlFor='password'
+                className='text-sm font-semibold text-gray-900'
+              >
                 Password
               </label>
-              <Link href='/forgotpassword'>
-                <span className='text-blue-600 hover:underline'>
-                  Forgot Password?
-                </span>
-              </Link>
+              <div className='flex items-center'>
+                <input
+                  id='password'
+                  type={showPassword ? 'text' : 'password'}
+                  className={`border ${errors.password ? 'border-red-500' : 'border-gray-300'} w-full rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none`}
+                  {...register('password', { required: true })}
+                />
+
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute inset-y-0 right-0 flex items-center px-4'
+                >
+                  {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+                </button>
+              </div>
+              {errors.password && (
+                <p className='text-xs text-red-500'>Password is required</p>
+              )}
             </div>
-            <div className='flex items-center'>
-              <input
-                id='password'
-                type={showPassword ? 'text' : 'password'}
-                autoComplete='new-password'
-                {...register('password', { required: true, minLength: 6 })}
-                className='mt-2 block w-full rounded-md border bg-white px-4 py-2 text-gray-700 focus:border-2 focus:border-[#036c3c] focus:outline-none focus:ring-0'
-              />
-              <button
-                type='button'
-                onClick={() => setShowPassword(!showPassword)}
-                className='absolute right-3 p-2 focus:outline-none'
+            <div className='flex items-center justify-between'>
+              <label
+                htmlFor='remember'
+                className='text-sm font-semibold text-gray-900'
               >
-                {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-              </button>
+                <input
+                  id='remember'
+                  type='checkbox'
+                  className='mr-2'
+                  {...register('rememberMe')}
+                />
+                Remember me
+              </label>
+              <a
+                href='./forgotpassword'
+                className='text-sm font-semibold text-blue-600'
+              >
+                Forget Password?
+              </a>
             </div>
-            {errors.password?.type === 'required' && (
-              <p className='text-red-500'>Password is required</p>
-            )}
-            {errors.password?.type === 'minLength' && (
-              <p className='text-red-500'>
-                Please try something more then 6 character
-              </p>
-            )}
+            <button
+              type='submit'
+              className='mt-4 w-full rounded-lg bg-orange-500 py-2 font-semibold text-white'
+            >
+              Log In
+            </button>
+          </form>
+          <div className='mt-4 flex items-center'>
+            <p className='text-sm text-gray-600'>Do not have an account? </p>
+            <a
+              href='./signup'
+              className='ml-1 text-sm font-semibold text-blue-600'
+            >
+              Sign Up
+            </a>
           </div>
-
-          <div className='flex items-center '>
-            <input
-              type='checkbox'
-              id='rememberMe'
-              {...register('rememberMe')}
-              className='mr-2 h-4 w-4  cursor-pointer rounded border border-gray-400 accent-[#036c3c]'
-            />
-            <label htmlFor='rememberMe' className='font-normal text-gray-800'>
-              Remember me
-            </label>
-          </div>
-
-          <input
-            type='submit'
-            value='Sign In'
-            className='w-full transform cursor-pointer rounded-md bg-[#036c3c] px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-green-600 focus:bg-gray-600 focus:outline-none'
+        </div>
+        <div className='w-full max-w-md overflow-hidden rounded-r-lg bg-black shadow-md'>
+          <img
+            src={'/towers.png'}
+            alt={''}
+            className='h-full w-full opacity-90'
           />
-        </form>
-
-        <p className='mt-4 text-center text-sm text-gray-700'>
-          {'Create an account '}
-          <Link
-            href='/signup'
-            className='font-medium text-blue-600 hover:underline'
-          >
-            Signup
-          </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
 };
+
+export default SignInForm;

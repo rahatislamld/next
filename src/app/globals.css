@@ -14,3 +14,7 @@
 body {
   font-family: 'Lato', sans-serif;
 }
+
+.bg-amraneer {
+  background-image: url('/towers.png');
+}
