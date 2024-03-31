@@ -33,6 +33,6 @@ deploy:
 
   script:
     - echo "Deploying application..."
-    - ssh "$VPS_USER"@"$VPS_HOST" -p 22 "docker login && docker-compose -f /home/factoryze/projects/banglarmath/docker-compose.yml pull && docker-compose -f /home/factoryze/projects/banglarmath/docker-compose.yml up -d"
+    - ssh "$VPS_USER"@"$VPS_HOST" -p 22 "docker login && docker-compose -f /home/factoryze/projects/amarneer/docker-compose.yml pull && docker-compose -f /home/factoryze/projects/amarneer/docker-compose.yml up -d"
     - echo "Application successfully deployed."
 
