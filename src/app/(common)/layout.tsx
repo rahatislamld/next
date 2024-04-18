@@ -17,11 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={lato.className}>
+      <body
+        className={lato.className}
+        style={{ maxWidth: '1440px', margin: 'auto' }}
+      >
         <Theme accentColor='red'>
           <Providers>
             <NavBar />
-            <main className='bg-[#ecede8] pt-[90px]'>{children}</main>
+            <main className='bg-[#ecede8] '>{children}</main>
           </Providers>
           <ToastContainer />
         </Theme>

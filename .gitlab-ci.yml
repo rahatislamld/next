@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+  DOCKER_IMAGE_NAME: '$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG'
 
 before_script:
   - docker --version
@@ -35,4 +35,3 @@ deploy:
     - echo "Deploying application..."
     - ssh "$VPS_USER"@"$VPS_HOST" -p 22 "docker login && docker-compose -f /home/factoryze/projects/amarneer/docker-compose.yml pull && docker-compose -f /home/factoryze/projects/amarneer/docker-compose.yml up -d"
     - echo "Application successfully deployed."
-

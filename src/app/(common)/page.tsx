@@ -53,10 +53,7 @@ const Homepage = () => {
       <div className='flex w-full flex-col items-center bg-[#022950]'>
         {/* text div */}
         <div className='flex max-w-[500px] flex-col py-[100px] text-center'>
-          <h4
-            className='text-white'
-            style={{ fontSize: '64px', lineHeight: '70px' }}
-          >
+          <h4 className='text-[64px] leading-[72px] text-white  '>
             Elevate Your
           </h4>
           <p
@@ -197,7 +194,7 @@ const Homepage = () => {
       <div className='h-[710px] w-full items-center bg-blue-900'>
         <div className='relative top-16 ml-[.375rem] flex items-center justify-center'>
           <div className='flex h-[225px] w-[628px] flex-col items-center justify-center py-[100px]'>
-            <div className='font-inter leading-29 text-center text-[24px] font-extrabold font-semibold text-orange-500'>
+            <div className='font-inter leading-29 text-center text-[24px] font-extrabold  text-orange-500'>
               Do you want to sponsor us?
             </div>
             <br />
