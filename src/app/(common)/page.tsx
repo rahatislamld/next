@@ -177,27 +177,34 @@ const Homepage = () => {
       <br />
       <br />
       {/* map sections */}
-      <div className='w-full bg-gray-300'>
-        {/* <img
-          src='/location.jpg'
-          className='h-auto w-full md:h-[1080px]'
-          alt='Location Image'
-        /> */}
-
-        <iframe
-          src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7304.901118196387!2d90.39602275!3d23.731307299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8e9a09d3565%3A0x5cfe6b47f59cb10b!2sDhaka%20University%20Campus%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1713548033185!5m2!1sen!2sbd'
-          width='1440'
-          height='728'
-          style={{ border: 0 }}
-          allowFullScreen
-          loading='lazy'
-          referrerPolicy='no-referrer-when-downgrade'
-        ></iframe>
+      <div className='bg-gray-30 mt-10 w-full'>
+        <address className='text-center text-3xl font-bold text-blue-900'>
+          Our Location
+        </address>
+        <div
+          className='mt-10'
+          style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}
+        >
+          <iframe
+            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7304.901118196387!2d90.39602275!3d23.731307299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8e9a09d3565%3A0x5cfe6b47f59cb10b!2sDhaka%20University%20Campus%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1713548033185!5m2!1sen!2sbd'
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              border: 0,
+            }}
+            allowFullScreen
+            loading='lazy'
+            referrerPolicy='no-referrer-when-downgrade'
+          ></iframe>
+        </div>
       </div>
 
       {/* who we are section */}
 
-      <div className='mx-auto max-w-screen-lg'>
+      <div className='mx-auto mt-10 max-w-screen-lg'>
         <h3 className='mt-8 text-center text-3xl font-bold text-orange-500'>
           <span className='text-blue-900'>Who</span> we are?
         </h3>

@@ -18,8 +18,8 @@ function App() {
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 100,
-          modifier: 2.5,
+          depth: 150,
+          modifier: 3,
           slideShadows: true, // optional, disables shadows
         }}
         pagination={{ clickable: true }}
@@ -30,25 +30,25 @@ function App() {
         modules={[EffectCoverflow, Pagination, Navigation]}
         className='swiper_container'
       >
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house1.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house2.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./building1.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house1.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house1.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house1.jpeg' alt='slide_image' />
         </SwiperSlide>
-        <SwiperSlide style={{ width: '410px' }}>
+        <SwiperSlide style={{ width: '710px' }}>
           <img src='./house1.jpeg' alt='slide_image' />
         </SwiperSlide>
       </Swiper>
