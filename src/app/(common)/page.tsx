@@ -131,9 +131,10 @@ const Homepage = () => {
 </div> */}
 
       <div className='bg-custom-gray flex flex-col items-center justify-center p-4'>
-        <div className='mb-4 rounded-full bg-orange-100 p-2 text-center'>
-          <div className='text-3xl text-orange-500'>services</div>
+        <div className='mb-8 rounded-full bg-orange-100 p-2 text-center'>
+          services
         </div>
+
         <h2 className='mb-4 text-4xl'>
           Our Best <span className='text-orange-500'>Services</span>
         </h2>
@@ -177,11 +178,21 @@ const Homepage = () => {
       <br />
       {/* map sections */}
       <div className='w-full bg-gray-300'>
-        <img
+        {/* <img
           src='/location.jpg'
           className='h-auto w-full md:h-[1080px]'
           alt='Location Image'
-        />
+        /> */}
+
+        <iframe
+          src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7304.901118196387!2d90.39602275!3d23.731307299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8e9a09d3565%3A0x5cfe6b47f59cb10b!2sDhaka%20University%20Campus%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1713548033185!5m2!1sen!2sbd'
+          width='1440'
+          height='728'
+          style={{ border: 0 }}
+          allowFullScreen
+          loading='lazy'
+          referrerPolicy='no-referrer-when-downgrade'
+        ></iframe>
       </div>
 
       {/* who we are section */}
