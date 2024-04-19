@@ -19,6 +19,12 @@ const NavBar: React.FC = () => {
   }, [activeMenu]);
 
   const navigation = [
+    { name: 'Home', href: '/signup' },
+    { name: 'My Accounts', href: '/signin' },
+    { name: 'Orders', href: '/signup' },
+    { name: 'Calculator', href: '/signin' },
+    { name: 'Call us', href: '/signup' },
+    { name: 'Mail Us', href: '/signin' },
     { name: 'SignUp', href: '/signup' },
     { name: 'SignIn', href: '/signin' },
   ];
@@ -28,13 +34,13 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <Disclosure as='nav' className='bg-white shadow'>
+    <Disclosure as='nav' className='bg-[#002F5B] '>
       {({ open }: any) => (
         <>
           <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='flex h-16 justify-between'>
               <div className='flex'>
-                <div className='flex flex-shrink-0 items-center'>
+                <div className='flex flex-shrink-0 items-center gap-2'>
                   <Image
                     src={'/applogo.svg'}
                     alt='logo'
@@ -42,6 +48,9 @@ const NavBar: React.FC = () => {
                     width={150}
                     className='h-[44px] w-[33px]'
                   />
+                  <div className='font-krona-one leading-28 text-left text-base font-normal text-white'>
+                    AmarNeer
+                  </div>
                 </div>
               </div>
               <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
@@ -50,7 +59,7 @@ const NavBar: React.FC = () => {
                     key={item.name}
                     href={item.href} // Use href attribute for routing
                     onClick={() => handleMenuClick(item.name)}
-                    className={`inline-flex items-center px-1 pt-1 text-sm font-semibold text-gray-500 hover:text-gray-700 ${
+                    className={`inline-flex items-center px-1 pt-1 text-sm font-semibold text-gray-500 hover:text-orange-500 ${
                       activeMenu === item.name
                         ? 'border-b-2 border-gray-500'
                         : ''

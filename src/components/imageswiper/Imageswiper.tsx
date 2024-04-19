@@ -20,7 +20,7 @@ function App() {
           stretch: 0,
           depth: 100,
           modifier: 2.5,
-          slideShadows: false, // optional, disables shadows
+          slideShadows: true, // optional, disables shadows
         }}
         pagination={{ clickable: true }}
         navigation={{

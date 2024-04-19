@@ -50,25 +50,16 @@ const Homepage = () => {
   return (
     <div className='flex w-full flex-col bg-gray-100'>
       {/* hero section */}
-      <div className='flex w-full flex-col items-center bg-[#022950]'>
+      <div className='flex flex-col items-center bg-[#022950]'>
         {/* text div */}
-        <div className='flex max-w-[500px] flex-col py-[100px] text-center'>
-          <h4 className='text-[64px] leading-[72px] text-white  '>
+        <div className='flex max-w-md flex-col items-center px-4 py-16 text-center'>
+          <h4 className='text-4xl leading-[1.2] text-white md:text-5xl lg:text-6xl'>
             Elevate Your
           </h4>
-          <p
-            className='text-orange-500'
-            style={{
-              fontSize: '64px',
-              lineHeight: '70px',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <p className='mt-2 text-4xl leading-[1.2] text-orange-500 md:text-5xl lg:text-6xl'>
             Living Experience
           </p>
-          <br />
-          <br />
-          <div className='tracking-wider text-white'>
+          <div className='mt-4 text-white'>
             Embark on a journey where sophistication meets serenity. Our
             meticulously curated real estate offerings redefine the essence of
             home, providing not just a residence but an elevated lifestyle.
@@ -91,107 +82,142 @@ const Homepage = () => {
           </div>
         </div>
         {/* carousel div */}
-        <div className='carousel'>
+        <div className='w-full'>
           {/* Add your carousel component or content here */}
           <Imageswiper />
         </div>
       </div>
 
       {/* services sections */}
-      <div className='bg-custom-gray flex h-[840px] w-full flex-col items-center justify-center'>
-        <br />
-        <br />
-        <div className='mb-8 rounded-full bg-orange-100 p-2 text-center'>
-          <div className='text-orange-500'>services</div>
-        </div>
+      {/* <div className='bg-custom-gray flex flex-col items-center justify-center'>
+  <div className='mb-8 rounded-full bg-orange-100 p-2 text-center'>
+    <div className='text-orange-500'>services</div>
+  </div>
 
-        <br />
-        <h2 className='text-4xl'>
+  <h2 className='text-4xl'>
+    Our Best <span className='text-orange-500'>Services</span>
+  </h2>
+
+  <div className='grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 mt-6'>
+    {cardsInfo
+      .slice(0, showAllCards ? cardsInfo.length : 5)
+      .map((card, index) => (
+        <div
+          key={index}
+          className='flex flex-col items-center gap-y-2 rounded-xl bg-white p-4 shadow-xl transition-transform duration-300 ease-in-out hover:scale-105'
+        >
+          <img
+            src={card.imageUrl}
+            alt={card.title}
+            className='h-[76px] w-[76px] rounded-[24px]'
+          />
+          <h2 className='text-center text-xl font-semibold'>
+            {card.title}
+          </h2>
+          <p className='text-center text-gray-600'>{card.description}</p>
+        </div>
+      ))}
+  </div>
+
+  {!showAllCards && (
+    <div
+      onClick={handleShowMoreClick}
+      className='flex cursor-pointer flex-col items-center justify-center rounded-lg bg-[#022950] p-4 text-white underline-offset-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-orange-500 hover:underline mt-6'
+    >
+      <h2 className='text-center text-xl font-semibold'>12+ Services</h2>
+      <p className='text-center'>You Can explore</p>
+    </div>
+  )}
+</div> */}
+
+      <div className='bg-custom-gray flex flex-col items-center justify-center p-4'>
+        <div className='mb-4 rounded-full bg-orange-100 p-2 text-center'>
+          <div className='text-3xl text-orange-500'>services</div>
+        </div>
+        <h2 className='mb-4 text-4xl'>
           Our Best <span className='text-orange-500'>Services</span>
         </h2>
-        <br />
-        <br />
-        <div className='h-[640px] w-[984px] '>
-          <div className=" 'w-[984px] grid h-[544px] grid-cols-3 gap-[26px] ">
-            {cardsInfo
-              .slice(0, showAllCards ? cardsInfo.length : 5)
-              .map((card, index) => (
-                <div
-                  key={index}
-                  className='flex cursor-pointer flex-col items-center gap-y-2 rounded-xl bg-white p-4 shadow-xl transition-transform duration-300 ease-in-out hover:scale-105'
-                >
-                  <img
-                    src={card.imageUrl}
-                    alt={card.title}
-                    className='h-[76px] w-[76px] rounded-[24px]'
-                  />
-                  <h2 className='text-center text-xl font-semibold'>
-                    {card.title}
-                  </h2>
-                  <p className='text-center text-gray-600'>
-                    {card.description}
-                  </p>
-                </div>
-              ))}
-            {!showAllCards && (
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+          {cardsInfo
+            .slice(0, showAllCards ? cardsInfo.length : 5)
+            .map((card, index) => (
               <div
-                onClick={handleShowMoreClick}
-                className='flex cursor-pointer flex-col items-center justify-center rounded-lg bg-[#022950] p-4 text-white underline-offset-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-orange-500 hover:underline'
+                key={index}
+                className='flex flex-col items-center gap-2 rounded-xl bg-white p-4 shadow-md transition-transform duration-300 ease-in-out hover:scale-105'
               >
-                <h2 className='text-center text-xl font-semibold'>
-                  12+ Services{' '}
+                <img
+                  src={card.imageUrl}
+                  alt={card.title}
+                  className='h-24 w-24 rounded-full md:h-32 md:w-32'
+                />
+                <h2 className='text-center text-lg font-semibold md:text-xl'>
+                  {card.title}
                 </h2>
-                <p className='text-center'>You Can explore</p>
+                <p className='text-center text-gray-600'>{card.description}</p>
               </div>
-            )}
-          </div>
+            ))}
+          {!showAllCards && (
+            <div
+              onClick={handleShowMoreClick}
+              className='flex flex-col items-center justify-center rounded-lg bg-[#022950] p-2 text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-orange-500'
+            >
+              <h2 className='text-center text-lg font-semibold md:text-xl'>
+                12+ Services
+              </h2>
+              <p className='text-center'>You Can explore</p>
+            </div>
+          )}
         </div>
       </div>
+
+      <br />
+      <br />
+
       <br />
       <br />
       {/* map sections */}
       <div className='w-full bg-gray-300'>
-        <img src='/location.jpg' className='h-[1080px] w-full' />
+        <img
+          src='/location.jpg'
+          className='h-auto w-full md:h-[1080px]'
+          alt='Location Image'
+        />
       </div>
 
       {/* who we are section */}
 
-      <div className='ml-60 h-[883px] w-[1281px]'>
-        <br />
-
-        <h3 className='font-inter text-center text-5xl font-bold leading-7 text-orange-500'>
-          <span className='text-[#002F5B]'>Who</span> we are?
+      <div className='mx-auto max-w-screen-lg'>
+        <h3 className='mt-8 text-center text-3xl font-bold text-orange-500'>
+          <span className='text-blue-900'>Who</span> we are?
         </h3>
-        <br />
-        <br />
-        <br />
-        <br />
 
-        <div className='flex w-full flex-row items-center justify-center'>
-          <div className='h-[598px] w-2/3 overflow-hidden rounded-3xl bg-gradient-to-r from-green-500 to-green-400'>
-            <br />
-            <div className='font-inter relative mx-auto  mt-14 flex h-[369px] w-[713px] items-center justify-center text-base text-xl font-normal leading-7 text-white'>
-              <br />
-              Welcome to AmarNeer, where innovation meets real estate
-              excellence. As industry leaders, we redefine the way you
-              experience property.
-              <br /> <br />
-              With a commitment to integrity and client satisfaction, we
-              specialize in delivering tailored solutions that transform houses
-              into dream homes and investments into success stories.
-              <br /> <br />
-              At AmarNeer, we dont just sell properties; we craft experiences
-              and build lasting relationships. Join us in shaping the future of
-              real estate – where your vision becomes our mission.
+        <div className='mt-8 flex flex-col items-stretch justify-center md:flex-row'>
+          <div className='flex-grow md:mr-4 md:w-2/3'>
+            <div className='h-full overflow-hidden rounded-3xl bg-gradient-to-r from-green-500 to-green-400 '>
+              <div className='mt-10 p-8 text-lg text-white'>
+                Welcome to AmarNeer, where innovation meets real estate
+                excellence. As industry leaders, we redefine the way you
+                experience property.
+                <br />
+                <br />
+                With a commitment to integrity and client satisfaction, we
+                specialize in delivering tailored solutions that transform
+                houses into dream homes and investments into success stories.
+                <br />
+                <br />
+                At AmarNeer, we dont just sell properties; we craft experiences
+                and build lasting relationships. Join us in shaping the future
+                of real estate – where your vision becomes our mission.
+              </div>
             </div>
           </div>
-          <div className='flex w-1/3 items-center justify-center rounded-3xl bg-white'>
-            <img src='/who.svg' className='h-[598px] w-[457px]' />
+          <div className='mt-4 w-full flex-grow md:mt-0 md:w-1/3'>
+            <img src='/who.svg' className='h-full w-full' alt='Who We Are' />
           </div>
         </div>
       </div>
 
-      <div className='h-[710px] w-full items-center bg-blue-900'>
+      <div className='mt-20 h-[710px] w-full items-center bg-blue-900'>
         <div className='relative top-16 ml-[.375rem] flex items-center justify-center'>
           <div className='flex h-[225px] w-[628px] flex-col items-center justify-center py-[100px]'>
             <div className='font-inter leading-29 text-center text-[24px] font-extrabold  text-orange-500'>
@@ -218,7 +244,7 @@ const Homepage = () => {
         <br />
         <br />
         <br />
-        <div className='top-356 absolute left-[calc(50%-640px)] mt-20 h-0 w-[1380px] border border-gray-300'></div>
+        <div className='top-356 absolute left-[calc(50%-690px)] mt-20  h-0 w-[1380px] border border-gray-300'></div>
 
         <br />
         <br />
@@ -270,7 +296,7 @@ const Homepage = () => {
               <FaWhatsapp className='h-[32px] w-[32px] text-white' />
             </div>
           </div>
-          <div className='top-356 absolute left-[calc(50%-640px)] mt-60 h-0 w-[1380px] border border-gray-300'></div>
+          <div className='top-356 absolute left-[calc(50%-690px)] mt-60 h-0 w-[1380px] border border-gray-300'></div>
         </div>
       </div>
     </div>
