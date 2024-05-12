@@ -1,42 +1,20 @@
-FROM node:20-alpine AS base
+# Use official Node.js LTS image as base
+FROM node:lts-alpine AS build
 
-RUN apk add --no-cache libc6-compat
-RUN npm i -g pnpm
-
-FROM base AS dependencies
-
+# Set working directory
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
 
-FROM base AS build
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-WORKDIR /app
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
-# COPY .env.prod .env
-COPY --from=dependencies /app/node_modules ./node_modules
-ENV NODE_ENV production
 
-ARG NEXT_PUBLIC_API_URI
-ENV NEXT_PUBLIC_API_URI=${NEXT_PUBLIC_API_URI}
+# Build the application
+RUN npm run build
 
-RUN pnpm build
-
-FROM base AS deploy
-
-ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=build /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-CMD ["node", "server.js"]
+# Start the application
+CMD ["npm", "start"]

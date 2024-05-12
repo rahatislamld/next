@@ -1,0 +1,17 @@
+image: node:14.17.0
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Install Dependencies
+          script:
+            - npm install
+      - step:
+          name: Run Tests
+          script:
+            - npm test
+      - step:
+          name: Build
+          script:
+            - npm run build
